@@ -4,9 +4,7 @@ A collection of free, lightweight online tools built with pure HTML, Tailwind CS
 
 ## 🚀 Live Demo
 
-**[https://yourusername.github.io/tool-sites](https://yourusername.github.io/tool-sites)**
-
-*(Replace `yourusername` with your actual GitHub username)*
+**[https://www.qmsu.top](https://www.qmsu.top)**
 
 ## 📦 Available Tools
 
@@ -91,7 +89,7 @@ This project is configured for GitHub Pages deployment:
 1. Fork or clone this repository
 2. Go to repository Settings > Pages
 3. Select "Deploy from a branch" and choose `main` branch
-4. Your site will be live at `https://yourusername.github.io/tool-sites/`
+4. Your site will be live at `https://www.qmsu.top/`
 
 ## 📝 Configuration
 
