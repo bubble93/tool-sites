@@ -97,7 +97,7 @@ This project is configured for GitHub Pages deployment:
 
 Replace the placeholder IDs in each tool's HTML:
 
-- **Google Analytics 4**: Replace `G-XXXXXXXXXX` with your Measurement ID
+- **Google Analytics 4**: Replace `G-S9JM1LGH7L` with your Measurement ID
 - **Google Search Console**: Replace `XXXXXXXXXXXXXXXX` with your verification code
 - **Microsoft Clarity**: Replace `XXXXXXXXXX` with your Project ID
 
