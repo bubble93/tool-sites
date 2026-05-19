@@ -517,8 +517,7 @@
             colorDark: fgColor.value,
             colorLight: bgColor.value,
             correctLevel: QRCode.CorrectLevel[errorLevel.value],
-            useSVG: false,
-            image: logoImage ? logoImage : undefined
+            useSVG: false
           });
           
           setTimeout(() => {
@@ -532,16 +531,17 @@
           }, 100);
         });
         
-        tempCanvas.toBlob((blob) => {
-          const fileName = `qrcode_${i + 1}.png`;
-          zip.file(fileName, blob);
+        await new Promise((resolve) => {
+          tempCanvas.toBlob((blob) => {
+            const fileName = `qrcode_${i + 1}.png`;
+            zip.file(fileName, blob);
+            resolve();
+          });
         });
       }
       
-      setTimeout(async () => {
-        const content = await zip.generateAsync({ type: 'blob' });
-        saveAs(content, 'qrcodes.zip');
-      }, 500);
+      const zipContent = await zip.generateAsync({ type: 'blob' });
+      saveAs(zipContent, 'qrcodes.zip');
     }
     
     function handleLogoUpload(event) {
@@ -582,29 +582,34 @@
     
     fgColor.addEventListener('input', () => {
       fgColorHex.value = fgColor.value;
+      qrcode = null; qrcodeContainer.innerHTML = '';
       generateQRCode(qrContent.value || batchContent.value.split('\n')[0] || ' ');
     });
     
     fgColorHex.addEventListener('input', () => {
       if (/^#[0-9A-Fa-f]{6}$/.test(fgColorHex.value)) {
         fgColor.value = fgColorHex.value;
+        qrcode = null; qrcodeContainer.innerHTML = '';
         generateQRCode(qrContent.value || batchContent.value.split('\n')[0] || ' ');
       }
     });
     
     bgColor.addEventListener('input', () => {
       bgColorHex.value = bgColor.value;
+      qrcode = null; qrcodeContainer.innerHTML = '';
       generateQRCode(qrContent.value || batchContent.value.split('\n')[0] || ' ');
     });
     
     bgColorHex.addEventListener('input', () => {
       if (/^#[0-9A-Fa-f]{6}$/.test(bgColorHex.value)) {
         bgColor.value = bgColorHex.value;
+        qrcode = null; qrcodeContainer.innerHTML = '';
         generateQRCode(qrContent.value || batchContent.value.split('\n')[0] || ' ');
       }
     });
     
     errorLevel.addEventListener('change', () => {
+      qrcode = null; qrcodeContainer.innerHTML = '';
       generateQRCode(qrContent.value || batchContent.value.split('\n')[0] || ' ');
     });
     

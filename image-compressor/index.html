@@ -530,7 +530,9 @@
         return;
       }
       
-      imageList.innerHTML = '';
+      if (images.length === 0) {
+        imageList.innerHTML = '';
+      }
       
       for (let i = 0; i < filesToProcess.length; i++) {
         const file = filesToProcess[i];
@@ -684,13 +686,20 @@
       }
     }
     
-    function refreshAllCompressions() {
-      const urlsToRevoke = [...images.map(img => img.originalUrl), ...images.map(img => img.compressedUrl)];
+    async function refreshAllCompressions() {
+      if (images.length === 0) return;
       
+      const filesToReprocess = images.map(img => img.originalFile);
+      
+      images.forEach(img => URL.revokeObjectURL(img.compressedUrl));
       images.length = 0;
       imageList.innerHTML = '';
       
-      urlsToRevoke.forEach(url => URL.revokeObjectURL(url));
+      for (let i = 0; i < filesToReprocess.length; i++) {
+        const imageData = await compressImage(filesToReprocess[i]);
+        images.push(imageData);
+        addImageToList(imageData, images.length - 1);
+      }
       
       updateDownloadButton();
     }
@@ -729,18 +738,10 @@
     });
     
     resizeWidth.addEventListener('input', () => {
-      if (lockAspectRatio.checked && resizeHeight.value) {
-        const ratio = parseInt(resizeWidth.value) / parseInt(resizeHeight.value);
-        resizeHeight.value = Math.round(parseInt(resizeWidth.value) / ratio);
-      }
       refreshAllCompressions();
     });
     
     resizeHeight.addEventListener('input', () => {
-      if (lockAspectRatio.checked && resizeWidth.value) {
-        const ratio = parseInt(resizeWidth.value) / parseInt(resizeHeight.value);
-        resizeWidth.value = Math.round(parseInt(resizeHeight.value) * ratio);
-      }
       refreshAllCompressions();
     });
     

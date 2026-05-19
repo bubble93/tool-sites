@@ -642,10 +642,10 @@
           
           if (children.style.display === 'none') {
             children.style.display = 'block';
-            icon.textContent = children.querySelector('.json-bracket').textContent.startsWith('[') ? '[ ' : '{ ';
+            icon.textContent = icon.textContent.startsWith('[') ? '[' : '{';
           } else {
             children.style.display = 'none';
-            icon.textContent = children.querySelector('.json-bracket').textContent.startsWith('[') ? '[...]' : '{...}';
+            icon.textContent = icon.textContent.startsWith('[') ? '[...]' : '{...}';
           }
         });
       });
