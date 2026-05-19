@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Test and debug regular expressions in real-time. Visualize regex patterns, highlight matches, and learn with our cheat sheet.">
+  <meta name="keywords" content="regex tester, regular expression, regex visualizer, regex debug">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Regex Tester & Visualizer - Test Regular Expressions Online">
+  <meta property="og:description" content="Test and debug regular expressions in real-time. Visualize regex patterns, highlight matches, and learn with our cheat sheet.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/regex-tester/">
+  <meta property="og:site_name" content="Regex Tester">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourusername.github.io/regex-tester/">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      transition: max-height 0.3s ease-in;
+    }
+    .match-highlight {
+      background-color: rgba(16, 185, 129, 0.3);
+      border-radius: 4px;
+      padding: 0 2px;
+    }
+    .capture-group {
+      background-color: rgba(139, 92, 246, 0.3);
+      border-radius: 4px;
+      padding: 0 2px;
+    }
+  </style>
+  
+  <title>Free Regex Tester & Visualizer - Test Regular Expressions Online</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"></path>
+            <path d="M20 4v16"></path>
+            <path d="M4 4v16"></path>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-primary-400">Regex Tester</span>
+      </div>
+      <nav>
+        <a href="https://yourusername.github.io/" class="text-gray-300 hover:text-primary-400 transition-colors text-sm font-medium">
+          More Tools
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="flex-1 pt-16 pb-8 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center py-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary-400 mb-2">Regex Tester & Visualizer</h1>
+        <p class="text-gray-400">Test, debug, and visualize regular expressions in real-time</p>
+      </div>
+      
+      <!-- Top Section: Regex Input -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <label class="text-gray-300 text-sm font-medium">Pattern:</label>
+          <input type="text" id="regexInput" placeholder="Enter regex pattern..." value="([a-zA-Z0-9._-]+)@([a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)" class="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 font-mono text-sm">
+          <div class="flex items-center gap-2">
+            <label class="flex items-center gap-1 text-gray-300 text-sm cursor-pointer">
+              <input type="checkbox" id="flagG" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+              g
+            </label>
+            <label class="flex items-center gap-1 text-gray-300 text-sm cursor-pointer">
+              <input type="checkbox" id="flagI" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+              i
+            </label>
+            <label class="flex items-center gap-1 text-gray-300 text-sm cursor-pointer">
+              <input type="checkbox" id="flagM" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+              m
+            </label>
+            <label class="flex items-center gap-1 text-gray-300 text-sm cursor-pointer">
+              <input type="checkbox" id="flagS" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+              s
+            </label>
+            <label class="flex items-center gap-1 text-gray-300 text-sm cursor-pointer">
+              <input type="checkbox" id="flagU" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+              u
+            </label>
+          </div>
+          <div class="relative">
+            <select id="quickPatterns" class="px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-primary-500 cursor-pointer appearance-none pr-8">
+              <option value="">Quick Patterns...</option>
+              <option value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">Email</option>
+              <option value="https?://(www\.)?[a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([a-zA-Z0-9()@:%_\+.~#?&//=]*)">URL</option>
+              <option value="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}">Phone</option>
+              <option value="\d{1,2}/\d{1,2}/\d{2,4}">Date (MM/DD/YYYY)</option>
+              <option value="\b\d{3}[-.]?\d{3}[-.]?\d{4}\b">US Phone</option>
+              <option value="\b\d{4}[-.]?\d{4}[-.]?\d{4}[-.]?\d{4}\b">Credit Card</option>
+              <option value="#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})">Hex Color</option>
+              <option value="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b">Email (Simple)</option>
+            </select>
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- Middle Section: Test String + Results -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Left: Test String & Replace -->
+        <div class="space-y-6">
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Test String</h2>
+            <textarea id="testString" rows="8" placeholder="Enter test string..." class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 font-mono text-sm resize-y">Email me at contact@example.com or support@test.net. Visit https://www.example.com for more info.</textarea>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Replace</h2>
+            <div class="space-y-4">
+              <input type="text" id="replaceInput" placeholder="Replacement string (use $1, $2 for groups)" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 font-mono text-sm">
+              <div>
+                <h3 class="text-gray-300 text-sm font-medium mb-2">Result:</h3>
+                <div id="replaceResult" class="p-4 bg-gray-700/50 rounded-lg font-mono text-sm text-gray-300 min-h-[60px]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right: Matches + Groups -->
+        <div class="space-y-6">
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Matches</h2>
+            <div id="matchesContainer" class="space-y-2 max-h-[300px] overflow-y-auto">
+              <p class="text-gray-500 text-sm">No matches found</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Capture Groups</h2>
+            <div id="groupsContainer" class="space-y-2 max-h-[200px] overflow-y-auto">
+              <p class="text-gray-500 text-sm">No capture groups</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Highlight Preview -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-4">Highlighted Matches</h2>
+        <div id="highlightResult" class="p-4 bg-gray-700/50 rounded-lg font-mono text-sm whitespace-pre-wrap break-all min-h-[100px]"></div>
+      </div>
+      
+      <!-- Regex Breakdown -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-4">Regex Breakdown</h2>
+        <div id="breakdownContainer" class="space-y-2"></div>
+      </div>
+      
+      <!-- Cheat Sheet -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-4">Regex Cheat Sheet</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="\d">
+            <code class="text-primary-400">\d</code> <span class="text-xs text-gray-400">Digit</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="\w">
+            <code class="text-primary-400">\w</code> <span class="text-xs text-gray-400">Word char</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="\s">
+            <code class="text-primary-400">\s</code> <span class="text-xs text-gray-400">Whitespace</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern=".">
+            <code class="text-primary-400">.</code> <span class="text-xs text-gray-400">Any char</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="^">
+            <code class="text-primary-400">^</code> <span class="text-xs text-gray-400">Start</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="$">
+            <code class="text-primary-400">$</code> <span class="text-xs text-gray-400">End</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="+">
+            <code class="text-primary-400">+</code> <span class="text-xs text-gray-400">1+ times</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="*">
+            <code class="text-primary-400">*</code> <span class="text-xs text-gray-400">0+ times</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="?">
+            <code class="text-primary-400">?</code> <span class="text-xs text-gray-400">0/1 times</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="{3}">
+            <code class="text-primary-400">{3}</code> <span class="text-xs text-gray-400">3 times</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="[a-z]">
+            <code class="text-primary-400">[a-z]</code> <span class="text-xs text-gray-400">Lowercase</span>
+          </button>
+          <button class="cheat-sheet-btn px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg text-sm font-medium transition-colors" data-pattern="(abc)">
+            <code class="text-primary-400">(abc)</code> <span class="text-xs text-gray-400">Capture group</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-6">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">What is a regular expression?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">A regular expression (regex) is a sequence of characters that defines a search pattern. It's used for pattern matching with strings, or string matching, i.e. "find and replace"-like operations.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">What are regex flags?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Regex flags modify how the pattern is matched: g (global match), i (case insensitive), m (multiline), s (dotAll, . matches newlines), u (unicode).</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">How do I use capture groups?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Capture groups are defined with parentheses (). You can reference them with $1, $2, etc. in replacement strings, or access them via the match array.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">What is the difference between greedy and lazy matching?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Greedy matching (*, +) tries to match as much as possible. Lazy matching (*?, +?) tries to match as little as possible by adding a ? quantifier.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">How do I test regex for email validation?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Use our quick pattern "Email" to get started. A simple email regex is [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div>
+          <p>&copy; 2024 Tool Sites. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy" class="hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-primary-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Regex Tester & Visualizer",
+    "description": "Test and debug regular expressions in real-time. Visualize regex patterns, highlight matches, and learn with our cheat sheet.",
+    "url": "https://yourusername.github.io/regex-tester/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a regular expression?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A regular expression (regex) is a sequence of characters that defines a search pattern for string matching and manipulation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are regex flags?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Regex flags modify how the pattern is matched: g (global), i (case-insensitive), m (multiline), s (dotAll), u (unicode)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use capture groups?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Capture groups are defined with parentheses (). Reference them with $1, $2, etc. in replacements or via the match array."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between greedy and lazy matching?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Greedy (*, +) matches as much as possible. Lazy (*?, +?) matches as little as possible using an extra ?."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I test regex for email validation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use our quick pattern "Email" to get started. A simple email regex is [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Regex Tester Script -->
+  <script>
+    const regexInput = document.getElementById('regexInput');
+    const testString = document.getElementById('testString');
+    const replaceInput = document.getElementById('replaceInput');
+    const matchesContainer = document.getElementById('matchesContainer');
+    const groupsContainer = document.getElementById('groupsContainer');
+    const highlightResult = document.getElementById('highlightResult');
+    const replaceResult = document.getElementById('replaceResult');
+    const breakdownContainer = document.getElementById('breakdownContainer');
+    const quickPatterns = document.getElementById('quickPatterns');
+    const flagG = document.getElementById('flagG');
+    const flagI = document.getElementById('flagI');
+    const flagM = document.getElementById('flagM');
+    const flagS = document.getElementById('flagS');
+    const flagU = document.getElementById('flagU');
+    
+    function getFlags() {
+      let flags = '';
+      if (flagG.checked) flags += 'g';
+      if (flagI.checked) flags += 'i';
+      if (flagM.checked) flags += 'm';
+      if (flagS.checked) flags += 's';
+      if (flagU.checked) flags += 'u';
+      return flags;
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function testRegex() {
+      try {
+        const pattern = regexInput.value;
+        const flags = getFlags();
+        const regex = new RegExp(pattern, flags);
+        const str = testString.value;
+        
+        let matches = [];
+        let match;
+        
+        if (flags.includes('g')) {
+          while ((match = regex.exec(str)) !== null) {
+            matches.push(match);
+            if (match.index === regex.lastIndex) regex.lastIndex++;
+          }
+        } else {
+          match = regex.exec(str);
+          if (match) matches.push(match);
+        }
+        
+        // Update matches container
+        matchesContainer.innerHTML = '';
+        if (matches.length === 0) {
+          matchesContainer.innerHTML = '<p class="text-gray-500 text-sm">No matches found</p>';
+        } else {
+          matches.forEach((m, i) => {
+            const matchDiv = document.createElement('div');
+            matchDiv.className = 'bg-gray-700/50 rounded-lg p-3';
+            matchDiv.innerHTML = `
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-primary-400 font-medium text-sm">Match ${i+1}</span>
+                <span class="text-gray-500 text-xs">Index: ${m.index}</span>
+              </div>
+              <div class="font-mono text-sm text-gray-200 break-all">${escapeHtml(m[0])}</div>
+              ${m.length > 1 ? `
+                <div class="mt-2">
+                  <span class="text-gray-400 text-xs font-medium">Groups:</span>
+                  <div class="mt-1 space-y-1">
+                    ${m.slice(1).map((g, j) => `<div class="text-xs"><span class="text-purple-400 font-medium">${j+1}:</span> <code class="text-gray-200">${escapeHtml(g || '')}</code></div>`).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            `;
+            matchesContainer.appendChild(matchDiv);
+          });
+        }
+        
+        // Update groups container
+        groupsContainer.innerHTML = '';
+        if (matches.length > 0 && matches[0].length > 1) {
+          matches.forEach((m, i) => {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'bg-gray-700/50 rounded-lg p-2';
+            groupDiv.innerHTML = `
+              <span class="text-gray-400 text-xs font-medium">Match ${i+1}:</span>
+              <div class="mt-1">
+                ${m.slice(1).map((g, j) => `<span class="inline-block px-2 py-1 bg-purple-900/50 text-purple-200 rounded text-xs mr-1 mb-1">${j+1}: ${escapeHtml(g || '')}</span>`).join('')}
+              </div>
+            `;
+            groupsContainer.appendChild(groupDiv);
+          });
+        } else {
+          groupsContainer.innerHTML = '<p class="text-gray-500 text-sm">No capture groups</p>';
+        }
+        
+        // Update highlighted result
+        highlightResult.innerHTML = '';
+        let lastIndex = 0;
+        let html = '';
+        
+        if (matches.length === 0) {
+          html = escapeHtml(str);
+        } else {
+          matches.forEach((m) => {
+            html += escapeHtml(str.substring(lastIndex, m.index));
+            html += `<span class="match-highlight">${escapeHtml(m[0])}</span>`;
+            lastIndex = m.index + m[0].length;
+          });
+          html += escapeHtml(str.substring(lastIndex));
+        }
+        highlightResult.innerHTML = html;
+        
+        // Update replace result
+        if (replaceInput.value) {
+          try {
+            const result = str.replace(new RegExp(pattern, flags), replaceInput.value);
+            replaceResult.innerHTML = escapeHtml(result);
+          } catch (e) {
+            replaceResult.innerHTML = `<span class="text-red-400">Replacement error: ${e.message}</span>`;
+          }
+        } else {
+          replaceResult.innerHTML = '';
+        }
+        
+        // Update breakdown
+        breakdownContainer.innerHTML = '';
+        const breakdown = breakdownRegex(pattern);
+        breakdown.forEach((part) => {
+          const div = document.createElement('div');
+          div.className = 'flex items-start gap-3 p-3 bg-gray-700/50 rounded-lg';
+          div.innerHTML = `
+            <code class="text-primary-400 font-mono text-sm">${escapeHtml(part.pattern)}</code>
+            <span class="text-gray-300 text-sm">${part.explanation}</span>
+          `;
+          breakdownContainer.appendChild(div);
+        });
+        
+      } catch (e) {
+        matchesContainer.innerHTML = `<p class="text-red-400 text-sm">Regex error: ${e.message}</p>`;
+        groupsContainer.innerHTML = '';
+        highlightResult.innerHTML = '';
+        replaceResult.innerHTML = '';
+        breakdownContainer.innerHTML = '';
+      }
+    }
+    
+    function breakdownRegex(pattern) {
+      const parts = [];
+      let i = 0;
+      
+      while (i < pattern.length) {
+        let char = pattern[i];
+        
+        if (char === '\\') {
+          i++;
+          if (i < pattern.length) {
+            parts.push({ pattern: '\\' + pattern[i], explanation: escapeChar(pattern[i]) });
+            i++;
+          }
+        } else if (char === '(') {
+          let j = i + 1;
+          let depth = 1;
+          while (j < pattern.length && depth > 0) {
+            if (pattern[j] === '(') depth++;
+            if (pattern[j] === ')') depth--;
+            j++;
+          }
+          parts.push({ pattern: pattern.substring(i, j), explanation: 'Capture group' });
+          i = j;
+        } else if (char === '[') {
+          let j = i + 1;
+          while (j < pattern.length && pattern[j] !== ']') {
+            if (pattern[j] === '\\') j++;
+            j++;
+          }
+          parts.push({ pattern: pattern.substring(i, j + 1), explanation: 'Character class' });
+          i = j + 1;
+        } else if (char === '^') {
+          parts.push({ pattern: '^', explanation: 'Start of string' });
+          i++;
+        } else if (char === '$') {
+          parts.push({ pattern: '$', explanation: 'End of string' });
+          i++;
+        } else if (char === '*') {
+          parts.push({ pattern: '*', explanation: '0 or more times (greedy)' });
+          i++;
+        } else if (char === '+') {
+          parts.push({ pattern: '+', explanation: '1 or more times (greedy)' });
+          i++;
+        } else if (char === '?') {
+          parts.push({ pattern: '?', explanation: '0 or 1 time (optional)' });
+          i++;
+        } else if (char === '.') {
+          parts.push({ pattern: '.', explanation: 'Any character' });
+          i++;
+        } else if (char === '|') {
+          parts.push({ pattern: '|', explanation: 'OR' });
+          i++;
+        } else if (char === '{') {
+          let j = i + 1;
+          while (j < pattern.length && pattern[j] !== '}') j++;
+          parts.push({ pattern: pattern.substring(i, j + 1), explanation: 'Quantifier' });
+          i = j + 1;
+        } else {
+          parts.push({ pattern: char, explanation: 'Literal character' });
+          i++;
+        }
+      }
+      
+      return parts;
+    }
+    
+    function escapeChar(c) {
+      const map = {
+        'd': 'Digit (0-9)',
+        'w': 'Word character (a-z, A-Z, 0-9, _)',
+        's': 'Whitespace (space, tab, newline)',
+        'n': 'Newline',
+        't': 'Tab',
+        'r': 'Carriage return',
+        'f': 'Form feed',
+        'b': 'Word boundary'
+      };
+      return map[c] || 'Escaped character';
+    }
+    
+    // Event listeners
+    regexInput.addEventListener('input', testRegex);
+    testString.addEventListener('input', testRegex);
+    replaceInput.addEventListener('input', testRegex);
+    
+    [flagG, flagI, flagM, flagS, flagU].forEach(flag => {
+      flag.addEventListener('change', testRegex);
+    });
+    
+    quickPatterns.addEventListener('change', (e) => {
+      if (e.target.value) {
+        regexInput.value = e.target.value;
+        quickPatterns.value = '';
+        testRegex();
+      }
+    });
+    
+    document.querySelectorAll('.cheat-sheet-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        regexInput.value = btn.dataset.pattern;
+        testRegex();
+      });
+    });
+    
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.target;
+        const answer = document.getElementById(targetId);
+        const icon = toggle.querySelector('svg');
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+    
+    // Initial run
+    testRegex();
+  </script>
+</body>
+</html>

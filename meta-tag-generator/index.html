@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate meta tags for SEO and social media. Preview how your page looks on Google, Facebook, and Twitter before publishing.">
+  <meta name="keywords" content="meta tags, seo, open graph, twitter card, meta generator">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Meta Tag Generator - Preview Google, Facebook & Twitter Cards">
+  <meta property="og:description" content="Generate meta tags for SEO and social media. Preview how your page looks on Google, Facebook, and Twitter before publishing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/meta-tag-generator/">
+  <meta property="og:site_name" content="Meta Tag Generator">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourusername.github.io/meta-tag-generator/">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      transition: max-height 0.3s ease-in;
+    }
+    .serp-preview {
+      background: white;
+      color: #1a0dab;
+      font-family: Arial, sans-serif;
+    }
+    .serp-url {
+      color: #006621;
+    }
+    .serp-description {
+      color: #545454;
+    }
+    .fb-card {
+      background: #1877f2;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .twitter-card {
+      background: white;
+      border: 1px solid #e1e8ed;
+      border-radius: 15px;
+    }
+    .twitter-icon {
+      color: #1da1f2;
+    }
+  </style>
+  
+  <title>Free Meta Tag Generator - Preview Google, Facebook & Twitter Cards</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-primary-400">Meta Tag Generator</span>
+      </div>
+      <nav>
+        <a href="https://yourusername.github.io/" class="text-gray-300 hover:text-primary-400 transition-colors text-sm font-medium">
+          More Tools
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="flex-1 pt-16 pb-8 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center py-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary-400 mb-2">Meta Tag Generator</h1>
+        <p class="text-gray-400">Generate SEO meta tags and preview how your page appears on search engines and social media</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Left Panel - Form -->
+        <div class="space-y-6">
+          <!-- Basic SEO -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Basic SEO</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">Page URL</label>
+                <input type="url" id="url" placeholder="https://example.com/page" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-gray-400 text-sm">Title</label>
+                  <span id="titleCount" class="text-gray-500 text-sm">0/60</span>
+                </div>
+                <input type="text" id="title" placeholder="Your page title" maxlength="70"
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+                <p class="text-gray-500 text-xs mt-1">Recommended: 50-60 characters for best SEO</p>
+              </div>
+              
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-gray-400 text-sm">Description</label>
+                  <span id="descCount" class="text-gray-500 text-sm">0/160</span>
+                </div>
+                <textarea id="description" placeholder="Brief description of your page..." rows="3" maxlength="200"
+                          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 resize-none"></textarea>
+                <p class="text-gray-500 text-xs mt-1">Recommended: 150-160 characters</p>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">Keywords (comma separated)</label>
+                <input type="text" id="keywords" placeholder="keyword1, keyword2, keyword3" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">Author</label>
+                <input type="text" id="author" placeholder="John Doe" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">Robots</label>
+                <select id="robots" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-primary-500">
+                  <option value="index, follow">index, follow</option>
+                  <option value="noindex, follow">noindex, follow</option>
+                  <option value="index, nofollow">index, nofollow</option>
+                  <option value="noindex, nofollow">noindex, nofollow</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Open Graph -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Open Graph (Facebook)</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:title</label>
+                <input type="text" id="ogTitle" placeholder="Open Graph Title" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:description</label>
+                <textarea id="ogDescription" placeholder="Open Graph Description..." rows="2"
+                          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 resize-none"></textarea>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:image</label>
+                <input type="url" id="ogImage" placeholder="https://example.com/image.jpg" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+                <div id="ogImagePreview" class="mt-2 hidden">
+                  <img id="ogImageThumb" class="max-h-32 rounded-lg border border-gray-600" alt="Preview">
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:url</label>
+                <input type="url" id="ogUrl" placeholder="https://example.com/page" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:type</label>
+                <select id="ogType" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-primary-500">
+                  <option value="website">website</option>
+                  <option value="article">article</option>
+                  <option value="blog">blog</option>
+                  <option value="product">product</option>
+                  <option value="video.movie">video.movie</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">og:site_name</label>
+                <input type="text" id="ogSiteName" placeholder="Your Site Name" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Twitter Card -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Twitter Card</h2>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">twitter:card</label>
+                <select id="twitterCard" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-primary-500">
+                  <option value="summary">summary</option>
+                  <option value="summary_large_image">summary_large_image</option>
+                  <option value="app">app</option>
+                  <option value="player">player</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">twitter:title</label>
+                <input type="text" id="twitterTitle" placeholder="Twitter Title" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">twitter:description</label>
+                <textarea id="twitterDescription" placeholder="Twitter Description..." rows="2"
+                          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 resize-none"></textarea>
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">twitter:image</label>
+                <input type="url" id="twitterImage" placeholder="https://example.com/twitter-image.jpg" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+              
+              <div>
+                <label class="block text-gray-400 text-sm mb-2">twitter:site</label>
+                <input type="text" id="twitterSite" placeholder="@yourhandle" 
+                       class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Panel - Preview & Code -->
+        <div class="space-y-6">
+          <!-- Preview Cards -->
+          <div class="space-y-4">
+            <!-- Google SERP Preview -->
+            <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+              <h3 class="text-gray-300 font-medium mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15.536 9.464a5 5 0 0 1 0 7.072m2.828-9.9a9 9 0 0 1 0 12.728M5.586 15.586a3 3 0 1 1-4.243-4.243m4.242 4.242a3 3 0 0 0 4.243 0m0-9.9a9 9 0 0 0-12.728 0"/>
+                </svg>
+                Google Search Preview
+              </h3>
+              <div id="serpPreview" class="serp-preview p-4 rounded-lg">
+                <div class="text-lg font-medium leading-relaxed mb-1" id="serpTitle">Your Page Title Will Appear Here</div>
+                <div class="text-sm serp-url mb-1" id="serpUrl">https://example.com</div>
+                <div class="text-sm serp-description" id="serpDescription">This is where your meta description will appear in the search results...</div>
+              </div>
+            </div>
+            
+            <!-- Facebook Preview -->
+            <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+              <h3 class="text-gray-300 font-medium mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+                Facebook Share Preview
+              </h3>
+              <div id="fbPreview" class="fb-card p-4 text-white">
+                <div class="flex items-center gap-2 mb-3">
+                  <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold">F</div>
+                  <span class="font-semibold">Facebook</span>
+                </div>
+                <div id="fbTitle" class="font-semibold text-lg mb-1">Your Open Graph Title</div>
+                <div id="fbDescription" class="text-sm text-blue-100 mb-3">Your Open Graph description will appear here...</div>
+                <div id="fbImageWrapper" class="bg-gray-900 rounded-lg overflow-hidden flex justify-center">
+                  <img id="fbImage" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect fill='%23374151' width='400' height='200'/%3E%3Ctext fill='%236B7280' font-family='sans-serif' font-size='14' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3EImage Preview Area%3C/text%3E%3C/svg%3E" alt="Preview" class="max-h-48">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Twitter Preview -->
+            <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+              <h3 class="text-gray-300 font-medium mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 twitter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                </svg>
+                Twitter Card Preview
+              </h3>
+              <div id="twitterPreview" class="twitter-card p-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 twitter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-gray-900" id="twitterHandle">@YourHandle</div>
+                    <div class="text-sm text-gray-500" id="twitterSiteHandle">@yourSite</div>
+                  </div>
+                </div>
+                <div id="twitterTitle" class="text-gray-900 font-medium mt-3 mb-1">Your Twitter Title</div>
+                <div id="twitterDesc" class="text-gray-600 text-sm mb-3">Your Twitter description will appear here...</div>
+                <div id="twitterImageWrapper" class="bg-gray-100 rounded-lg overflow-hidden">
+                  <img id="twitterImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect fill='%23E5E7EB' width='400' height='200'/%3E%3Ctext fill='%239CA3AF' font-family='sans-serif' font-size='14' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3ETwitter Image Preview%3C/text%3E%3C/svg%3E" alt="Preview" class="max-h-32 w-full">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AD SLOT -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+            <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+              <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+            </div>
+          </div>
+          
+          <!-- Generated Code -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+              <span class="text-gray-300 font-medium">Generated Meta Tags</span>
+              <button id="copyBtn" class="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy All
+              </button>
+            </div>
+            <div class="p-4 bg-gray-900">
+              <pre id="metaCode" class="text-xs text-gray-300 font-mono whitespace-pre-wrap break-all"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-primary-400 mb-6">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">What are meta tags?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Meta tags are snippets of code that provide metadata about your web page. They help search engines understand what your page is about and are used to display information in search results and social media previews.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">What is Open Graph?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Open Graph is a protocol that allows you to control how your content appears when shared on Facebook and other social platforms. It uses meta tags like og:title, og:description, and og:image to create rich previews.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">How long should a meta description be?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Meta descriptions should be between 150-160 characters. Longer descriptions may be truncated by search engines, while shorter ones may not provide enough information to entice users to click.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">What is a Twitter Card?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Twitter Cards are a feature that allows you to attach rich media to your tweets when your content is shared. They use twitter:card, twitter:title, and other meta tags to create enhanced previews.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">How do I test my meta tags?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">You can test meta tags using Facebook's Sharing Debugger, Twitter's Card Validator, and Google's Rich Results Test. These tools show how your content will appear when shared and help identify issues.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div>
+          <p>&copy; 2024 Tool Sites. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy" class="hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-primary-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meta Tag Generator",
+    "description": "Generate meta tags for SEO and social media. Preview how your page looks on Google, Facebook, and Twitter before publishing.",
+    "url": "https://yourusername.github.io/meta-tag-generator/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are meta tags?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Meta tags are snippets of code that provide metadata about your web page, helping search engines understand content and display information in search results and social media previews."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Open Graph?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open Graph is a protocol that allows you to control how your content appears when shared on Facebook and other social platforms using meta tags like og:title, og:description, and og:image."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should a meta description be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Meta descriptions should be between 150-160 characters. Longer descriptions may be truncated by search engines."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Twitter Card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Twitter Cards allow you to attach rich media to your tweets when your content is shared, using twitter:card, twitter:title, and other meta tags."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I test my meta tags?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can test meta tags using Facebook's Sharing Debugger, Twitter's Card Validator, and Google's Rich Results Test."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Meta Tag Generator Script -->
+  <script>
+    const formFields = [
+      'url', 'title', 'description', 'keywords', 'author', 'robots',
+      'ogTitle', 'ogDescription', 'ogImage', 'ogUrl', 'ogType', 'ogSiteName',
+      'twitterCard', 'twitterTitle', 'twitterDescription', 'twitterImage', 'twitterSite'
+    ];
+    
+    const titleInput = document.getElementById('title');
+    const descriptionInput = document.getElementById('description');
+    const titleCount = document.getElementById('titleCount');
+    const descCount = document.getElementById('descCount');
+    const ogImageInput = document.getElementById('ogImage');
+    const ogImagePreview = document.getElementById('ogImagePreview');
+    const ogImageThumb = document.getElementById('ogImageThumb');
+    const copyBtn = document.getElementById('copyBtn');
+    
+    function updateCounters() {
+      const titleLen = titleInput.value.length;
+      const descLen = descriptionInput.value.length;
+      
+      titleCount.textContent = `${titleLen}/60`;
+      titleCount.className = titleLen > 60 ? 'text-red-400 text-sm' : 'text-gray-500 text-sm';
+      
+      descCount.textContent = `${descLen}/160`;
+      descCount.className = descLen > 160 ? 'text-red-400 text-sm' : 'text-gray-500 text-sm';
+    }
+    
+    function updatePreviews() {
+      const url = document.getElementById('url').value || 'https://example.com';
+      const title = document.getElementById('title').value || 'Your Page Title Will Appear Here';
+      const description = document.getElementById('description').value || 'This is where your meta description will appear in the search results...';
+      
+      document.getElementById('serpTitle').textContent = title;
+      document.getElementById('serpUrl').textContent = url;
+      document.getElementById('serpDescription').textContent = description;
+      
+      const ogTitle = document.getElementById('ogTitle').value || title;
+      const ogDesc = document.getElementById('ogDescription').value || description;
+      const ogImg = document.getElementById('ogImage').value;
+      
+      document.getElementById('fbTitle').textContent = ogTitle;
+      document.getElementById('fbDescription').textContent = ogDesc;
+      document.getElementById('fbImage').src = ogImg || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'%3E%3Crect fill=\'%23374151\' width=\'400\' height=\'200\'/%3E%3Ctext fill=\'%236B7280\' font-family=\'sans-serif\' font-size=\'14\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3EImage Preview Area%3C/text%3E%3C/svg%3E';
+      
+      const twTitle = document.getElementById('twitterTitle').value || title;
+      const twDesc = document.getElementById('twitterDescription').value || description;
+      const twImg = document.getElementById('twitterImage').value;
+      const twSite = document.getElementById('twitterSite').value || '@yourSite';
+      
+      document.getElementById('twitterTitle').textContent = twTitle;
+      document.getElementById('twitterDesc').textContent = twDesc;
+      document.getElementById('twitterImg').src = twImg || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'%3E%3Crect fill=\'%23E5E7EB\' width=\'400\' height=\'200\'/%3E%3Ctext fill=\'%239CA3AF\' font-family=\'sans-serif\' font-size=\'14\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ETwitter Image Preview%3C/text%3E%3C/svg%3E';
+      document.getElementById('twitterSiteHandle').textContent = twSite;
+      
+      generateCode();
+    }
+    
+    function generateCode() {
+      let code = '';
+      
+      code += '<meta charset="UTF-8">\n';
+      code += '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+      
+      const title = document.getElementById('title').value;
+      if (title) code += `<meta name="title" content="${escapeHtml(title)}">\n`;
+      
+      const desc = document.getElementById('description').value;
+      if (desc) code += `<meta name="description" content="${escapeHtml(desc)}">\n`;
+      
+      const keywords = document.getElementById('keywords').value;
+      if (keywords) code += `<meta name="keywords" content="${escapeHtml(keywords)}">\n`;
+      
+      const author = document.getElementById('author').value;
+      if (author) code += `<meta name="author" content="${escapeHtml(author)}">\n`;
+      
+      const robots = document.getElementById('robots').value;
+      if (robots) code += `<meta name="robots" content="${robots}">\n`;
+      
+      const url = document.getElementById('url').value;
+      if (url) code += `<link rel="canonical" href="${url}">\n\n`;
+      
+      code += '<!-- Open Graph Meta Tags -->\n';
+      const ogTitle = document.getElementById('ogTitle').value || title;
+      if (ogTitle) code += `<meta property="og:title" content="${escapeHtml(ogTitle)}">\n`;
+      
+      const ogDesc = document.getElementById('ogDescription').value || desc;
+      if (ogDesc) code += `<meta property="og:description" content="${escapeHtml(ogDesc)}">\n`;
+      
+      const ogImg = document.getElementById('ogImage').value;
+      if (ogImg) code += `<meta property="og:image" content="${ogImg}">\n`;
+      
+      const ogUrl = document.getElementById('ogUrl').value || url;
+      if (ogUrl) code += `<meta property="og:url" content="${ogUrl}">\n`;
+      
+      const ogType = document.getElementById('ogType').value;
+      if (ogType) code += `<meta property="og:type" content="${ogType}">\n`;
+      
+      const ogSiteName = document.getElementById('ogSiteName').value;
+      if (ogSiteName) code += `<meta property="og:site_name" content="${escapeHtml(ogSiteName)}">\n\n`;
+      
+      code += '<!-- Twitter Card Meta Tags -->\n';
+      const twCard = document.getElementById('twitterCard').value;
+      if (twCard) code += `<meta name="twitter:card" content="${twCard}">\n`;
+      
+      const twTitle = document.getElementById('twitterTitle').value || title;
+      if (twTitle) code += `<meta name="twitter:title" content="${escapeHtml(twTitle)}">\n`;
+      
+      const twDesc = document.getElementById('twitterDescription').value || desc;
+      if (twDesc) code += `<meta name="twitter:description" content="${escapeHtml(twDesc)}">\n`;
+      
+      const twImg = document.getElementById('twitterImage').value || ogImg;
+      if (twImg) code += `<meta name="twitter:image" content="${twImg}">\n`;
+      
+      const twSite = document.getElementById('twitterSite').value;
+      if (twSite) code += `<meta name="twitter:site" content="${twSite}">\n`;
+      
+      document.getElementById('metaCode').textContent = code;
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML.replace(/"/g, '&quot;');
+    }
+    
+    function copyToClipboard() {
+      navigator.clipboard.writeText(document.getElementById('metaCode').textContent).then(() => {
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+        setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
+      });
+    }
+    
+    formFields.forEach(fieldId => {
+      const field = document.getElementById(fieldId);
+      if (field) {
+        field.addEventListener('input', () => {
+          if (fieldId === 'title' || fieldId === 'description') {
+            updateCounters();
+          }
+          updatePreviews();
+        });
+      }
+    });
+    
+    ogImageInput.addEventListener('input', () => {
+      if (ogImageInput.value) {
+        ogImageThumb.src = ogImageInput.value;
+        ogImagePreview.classList.remove('hidden');
+      } else {
+        ogImagePreview.classList.add('hidden');
+      }
+    });
+    
+    ogImageThumb.addEventListener('error', () => {
+      ogImagePreview.classList.add('hidden');
+    });
+    
+    copyBtn.addEventListener('click', copyToClipboard);
+    
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.target;
+        const answer = document.getElementById(targetId);
+        const icon = toggle.querySelector('svg');
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+    
+    updateCounters();
+    updatePreviews();
+  </script>
+</body>
+</html>

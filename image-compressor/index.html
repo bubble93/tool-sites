@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compress PNG, JPG, and WebP images online for free. Adjust quality, resize, and convert formats. No upload limits, no signup.">
+  <meta name="keywords" content="image compressor, compress image, reduce image size, online image tool, png to jpg">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free Online Image Compressor - Reduce Image Size Without Losing Quality">
+  <meta property="og:description" content="Compress PNG, JPG, and WebP images online for free. Adjust quality, resize, and convert formats. No upload limits, no signup.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/image-compressor/">
+  <meta property="og:site_name" content="Image Compressor">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourusername.github.io/image-compressor/">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- JSZip CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  
+  <!-- FileSaver CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      transition: max-height 0.3s ease-in;
+    }
+    .compare-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+    .compare-before, .compare-after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .compare-after {
+      clip-path: inset(0 50% 0 0);
+    }
+    .compare-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: white;
+      cursor: ew-resize;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    .compare-handle::before, .compare-handle::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .compare-handle::before {
+      left: -8px;
+    }
+    .compare-handle::after {
+      right: -8px;
+    }
+  </style>
+  
+  <title>Free Online Image Compressor - Reduce Image Size Without Losing Quality</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-primary-400">Image Compressor</span>
+      </div>
+      <nav>
+        <a href="https://yourusername.github.io/" class="text-gray-300 hover:text-primary-400 transition-colors text-sm font-medium">
+          More Tools
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="flex-1 pt-16 pb-8 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center py-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary-400 mb-4">Image Compressor</h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">Compress PNG, JPG, and WebP images online for free. Adjust quality, resize, convert formats, and download your optimized images.</p>
+      </div>
+      
+      <!-- Upload Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-8">
+        <div class="border-2 border-dashed border-gray-600 rounded-xl p-8 text-center hover:border-primary-500 transition-colors cursor-pointer" id="dropArea">
+          <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-400 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <p class="text-gray-300 text-lg font-medium mb-2">Click or drag images here to upload</p>
+          <p class="text-gray-500 text-sm">Supports PNG, JPG, WebP | Max 20 images</p>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-8">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- Settings & Preview Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Image List -->
+        <div class="lg:col-span-2">
+          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Uploaded Images</h2>
+            <div id="imageList" class="space-y-4">
+              <div class="text-center py-8 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <p>No images uploaded yet</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Settings Panel -->
+        <div class="space-y-6">
+          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h2 class="text-xl font-semibold text-primary-400 mb-4">Compression Settings</h2>
+            
+            <!-- Quality Slider -->
+            <div class="mb-6">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-gray-300 text-sm font-medium">Quality</label>
+                <span id="qualityValue" class="text-primary-400 font-semibold">80%</span>
+              </div>
+              <input type="range" id="qualitySlider" min="1" max="100" value="80" 
+                     class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500">
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>1% (Smallest)</span>
+                <span>100% (Best Quality)</span>
+              </div>
+            </div>
+            
+            <!-- Output Format -->
+            <div class="mb-6">
+              <label class="block text-gray-300 mb-2 text-sm font-medium">Output Format</label>
+              <select id="outputFormat" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-primary-500">
+                <option value="original">Keep Original Format</option>
+                <option value="png">PNG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="webp">WebP</option>
+              </select>
+            </div>
+            
+            <!-- Resize Settings -->
+            <div class="mb-6">
+              <label class="block text-gray-300 mb-2 text-sm font-medium">Resize (Optional)</label>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-gray-400 text-xs mb-1 block">Width</label>
+                  <input type="number" id="resizeWidth" placeholder="Original" 
+                         class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:border-primary-500">
+                </div>
+                <div>
+                  <label class="text-gray-400 text-xs mb-1 block">Height</label>
+                  <input type="number" id="resizeHeight" placeholder="Original" 
+                         class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:border-primary-500">
+                </div>
+              </div>
+              <label class="flex items-center gap-2 mt-2 text-gray-400 text-sm cursor-pointer">
+                <input type="checkbox" id="lockAspectRatio" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-primary-500 focus:ring-primary-500">
+                Lock aspect ratio
+              </label>
+            </div>
+            
+            <!-- Reset Button -->
+            <button id="resetSettings" class="w-full py-2 px-4 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors text-sm">
+              Reset Settings
+            </button>
+          </div>
+          
+          <!-- Batch Download Button -->
+          <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <button id="downloadAll" disabled class="w-full py-3 px-4 bg-gray-600 text-gray-400 font-medium rounded-lg transition-colors cursor-not-allowed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19V5"></path>
+                <path d="M18 13l-5 5-5-5"></path>
+              </svg>
+              Download All as ZIP
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-8">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-primary-400 mb-6">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">How does image compression work?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Image compression reduces file size by removing unnecessary data. Lossy compression removes some image data permanently, while lossless compression rearranges data more efficiently. Our tool uses Canvas API to apply quality-based compression while preserving visual fidelity.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ 2 -->
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">Will compression reduce my image quality?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes, higher compression (lower quality setting) will reduce image quality slightly. However, at quality settings above 70%, the difference is usually imperceptible to the human eye. You can preview both the original and compressed versions to find the best balance.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ 3 -->
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">What image formats are supported?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">We support PNG, JPG/JPEG, and WebP formats for upload. You can convert between these formats: PNG to JPG, JPG to WebP, WebP to PNG, etc. Each format has different compression characteristics - WebP typically offers the best compression.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ 4 -->
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">Can I compress multiple images at once?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes! You can upload up to 20 images at once. Simply select multiple files or drag them all into the upload area. All images will be compressed with your selected settings and can be downloaded together as a ZIP file.</p>
+            </div>
+          </div>
+          
+          <!-- FAQ 5 -->
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">Is my data safe?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes, your data is completely safe. All image processing happens locally in your browser using the Canvas API. None of your images are uploaded to our servers or stored anywhere. You can even use this tool offline after the page loads.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div>
+          <p>&copy; 2024 Tool Sites. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy" class="hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-primary-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Compressor",
+    "description": "Compress PNG, JPG, and WebP images online for free. Adjust quality, resize, and convert formats. No upload limits, no signup.",
+    "url": "https://yourusername.github.io/image-compressor/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does image compression work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Image compression reduces file size by removing unnecessary data. Lossy compression removes some image data permanently, while lossless compression rearranges data more efficiently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will compression reduce my image quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, higher compression will reduce image quality slightly. However, at quality settings above 70%, the difference is usually imperceptible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What image formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We support PNG, JPG/JPEG, and WebP formats for upload and conversion between them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compress multiple images at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! You can upload up to 20 images at once and download them as a ZIP file."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all image processing happens locally in your browser. None of your images are uploaded to servers."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Image Compressor Script -->
+  <script>
+    const MAX_IMAGES = 20;
+    const images = [];
+    
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+    const imageList = document.getElementById('imageList');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const qualityValue = document.getElementById('qualityValue');
+    const outputFormat = document.getElementById('outputFormat');
+    const resizeWidth = document.getElementById('resizeWidth');
+    const resizeHeight = document.getElementById('resizeHeight');
+    const lockAspectRatio = document.getElementById('lockAspectRatio');
+    const resetSettings = document.getElementById('resetSettings');
+    const downloadAll = document.getElementById('downloadAll');
+    
+    let currentImageIndex = null;
+    
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+    
+    function compressImage(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            
+            if (resizeWidth.value || resizeHeight.value) {
+              if (lockAspectRatio.checked) {
+                if (resizeWidth.value && resizeHeight.value) {
+                  const ratio = Math.min(resizeWidth.value / width, resizeHeight.value / height);
+                  width = width * ratio;
+                  height = height * ratio;
+                } else if (resizeWidth.value) {
+                  const ratio = resizeWidth.value / img.width;
+                  width = resizeWidth.value;
+                  height = img.height * ratio;
+                } else {
+                  const ratio = resizeHeight.value / img.height;
+                  width = img.width * ratio;
+                  height = resizeHeight.value;
+                }
+              } else {
+                width = resizeWidth.value || img.width;
+                height = resizeHeight.value || img.height;
+              }
+            }
+            
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const quality = qualitySlider.value / 100;
+            const format = outputFormat.value;
+            let mimeType = 'image/jpeg';
+            
+            if (format === 'original') {
+              mimeType = file.type === 'image/png' ? 'image/png' : 
+                         file.type === 'image/webp' ? 'image/webp' : 'image/jpeg';
+            } else if (format === 'png') {
+              mimeType = 'image/png';
+            } else if (format === 'webp') {
+              mimeType = 'image/webp';
+            }
+            
+            canvas.toBlob((blob) => {
+              resolve({
+                originalFile: file,
+                originalSize: file.size,
+                compressedBlob: blob,
+                compressedSize: blob.size,
+                originalUrl: e.target.result,
+                compressedUrl: URL.createObjectURL(blob),
+                width: width,
+                height: height
+              });
+            }, mimeType, mimeType === 'image/png' ? undefined : quality);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    
+    async function handleFiles(files) {
+      const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+      const remainingSlots = MAX_IMAGES - images.length;
+      const filesToProcess = validFiles.slice(0, remainingSlots);
+      
+      if (filesToProcess.length === 0) {
+        if (validFiles.length > 0) {
+          alert(`Maximum ${MAX_IMAGES} images allowed`);
+        }
+        return;
+      }
+      
+      imageList.innerHTML = '';
+      
+      for (let i = 0; i < filesToProcess.length; i++) {
+        const file = filesToProcess[i];
+        const imageData = await compressImage(file);
+        
+        images.push(imageData);
+        addImageToList(imageData, images.length - 1);
+      }
+      
+      updateDownloadButton();
+    }
+    
+    function addImageToList(imageData, index) {
+      const card = document.createElement('div');
+      card.className = 'bg-gray-700/50 rounded-xl p-4 border border-gray-700';
+      card.innerHTML = `
+        <div class="flex gap-4">
+          <div class="relative compare-slider w-32 h-32 flex-shrink-0 bg-gray-800 rounded-lg overflow-hidden">
+            <img src="${imageData.originalUrl}" class="compare-before w-full h-full object-contain" />
+            <img src="${imageData.compressedUrl}" class="compare-after w-full h-full object-contain" />
+            <div class="compare-handle"></div>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-gray-300 font-medium text-sm truncate max-w-[150px]" title="${imageData.originalFile.name}">${imageData.originalFile.name}</h3>
+              <button class="remove-image text-gray-400 hover:text-red-400 transition-colors" data-index="${index}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="flex items-center gap-2 text-sm mb-2">
+              <span class="text-gray-500">${formatFileSize(imageData.originalSize)}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+              <span class="text-primary-400 font-semibold">${formatFileSize(imageData.compressedSize)}</span>
+              <span class="text-green-400 text-xs ml-auto">-${((1 - imageData.compressedSize / imageData.originalSize) * 100).toFixed(1)}%</span>
+            </div>
+            <div class="flex gap-2">
+              <button class="download-single py-1.5 px-3 bg-primary-600 hover:bg-primary-700 text-white text-xs rounded-lg transition-colors" data-index="${index}">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      imageList.appendChild(card);
+      
+      setupCompareSlider(card.querySelector('.compare-slider'));
+      
+      card.querySelector('.remove-image').addEventListener('click', (e) => {
+        const idx = parseInt(e.target.closest('button').dataset.index);
+        removeImage(idx);
+      });
+      
+      card.querySelector('.download-single').addEventListener('click', (e) => {
+        const idx = parseInt(e.target.closest('button').dataset.index);
+        downloadSingle(idx);
+      });
+    }
+    
+    function setupCompareSlider(slider) {
+      const handle = slider.querySelector('.compare-handle');
+      const after = slider.querySelector('.compare-after');
+      let isDragging = false;
+      
+      const moveHandle = (e) => {
+        if (!isDragging) return;
+        const rect = slider.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        x = Math.max(0, Math.min(x, rect.width));
+        const percent = (x / rect.width) * 100;
+        after.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+        handle.style.left = `${percent}%`;
+      };
+      
+      slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        moveHandle(e);
+      });
+      
+      document.addEventListener('mousemove', moveHandle);
+      document.addEventListener('mouseup', () => { isDragging = false; });
+      
+      slider.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        moveHandle(e.touches[0]);
+      });
+      
+      document.addEventListener('touchmove', (e) => {
+        if (isDragging) moveHandle(e.touches[0]);
+      });
+      
+      document.addEventListener('touchend', () => { isDragging = false; });
+    }
+    
+    function removeImage(index) {
+      URL.revokeObjectURL(images[index].originalUrl);
+      URL.revokeObjectURL(images[index].compressedUrl);
+      images.splice(index, 1);
+      
+      imageList.innerHTML = '';
+      images.forEach((img, i) => addImageToList(img, i));
+      updateDownloadButton();
+      
+      if (images.length === 0) {
+        imageList.innerHTML = `
+          <div class="text-center py-8 text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p>No images uploaded yet</p>
+          </div>
+        `;
+      }
+    }
+    
+    function downloadSingle(index) {
+      const image = images[index];
+      const ext = image.compressedBlob.type.split('/')[1];
+      const name = image.originalFile.name.replace(/\.[^/.]+$/, '') + `_compressed.${ext}`;
+      saveAs(image.compressedBlob, name);
+    }
+    
+    async function downloadAllAsZIP() {
+      const zip = new JSZip();
+      
+      images.forEach((image, i) => {
+        const ext = image.compressedBlob.type.split('/')[1];
+        const name = image.originalFile.name.replace(/\.[^/.]+$/, '') + `_compressed.${ext}`;
+        zip.file(name, image.compressedBlob);
+      });
+      
+      const content = await zip.generateAsync({ type: 'blob' });
+      saveAs(content, 'compressed_images.zip');
+    }
+    
+    function updateDownloadButton() {
+      if (images.length > 0) {
+        downloadAll.disabled = false;
+        downloadAll.className = 'w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors';
+      } else {
+        downloadAll.disabled = true;
+        downloadAll.className = 'w-full py-3 px-4 bg-gray-600 text-gray-400 font-medium rounded-lg transition-colors cursor-not-allowed';
+      }
+    }
+    
+    function refreshAllCompressions() {
+      const urlsToRevoke = [...images.map(img => img.originalUrl), ...images.map(img => img.compressedUrl)];
+      
+      images.length = 0;
+      imageList.innerHTML = '';
+      
+      urlsToRevoke.forEach(url => URL.revokeObjectURL(url));
+      
+      updateDownloadButton();
+    }
+    
+    dropArea.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropArea.classList.add('border-primary-500');
+    });
+    
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('border-primary-500');
+    });
+    
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropArea.classList.remove('border-primary-500');
+      handleFiles(e.dataTransfer.files);
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+      fileInput.value = '';
+    });
+    
+    qualitySlider.addEventListener('input', (e) => {
+      qualityValue.textContent = e.target.value + '%';
+      refreshAllCompressions();
+    });
+    
+    outputFormat.addEventListener('change', () => {
+      refreshAllCompressions();
+    });
+    
+    resizeWidth.addEventListener('input', () => {
+      if (lockAspectRatio.checked && resizeHeight.value) {
+        const ratio = parseInt(resizeWidth.value) / parseInt(resizeHeight.value);
+        resizeHeight.value = Math.round(parseInt(resizeWidth.value) / ratio);
+      }
+      refreshAllCompressions();
+    });
+    
+    resizeHeight.addEventListener('input', () => {
+      if (lockAspectRatio.checked && resizeWidth.value) {
+        const ratio = parseInt(resizeWidth.value) / parseInt(resizeHeight.value);
+        resizeWidth.value = Math.round(parseInt(resizeHeight.value) * ratio);
+      }
+      refreshAllCompressions();
+    });
+    
+    lockAspectRatio.addEventListener('change', () => {
+      if (lockAspectRatio.checked && resizeWidth.value && resizeHeight.value) {
+        resizeWidth.dispatchEvent(new Event('input'));
+      }
+    });
+    
+    resetSettings.addEventListener('click', () => {
+      qualitySlider.value = 80;
+      qualityValue.textContent = '80%';
+      outputFormat.value = 'original';
+      resizeWidth.value = '';
+      resizeHeight.value = '';
+      lockAspectRatio.checked = true;
+      refreshAllCompressions();
+    });
+    
+    downloadAll.addEventListener('click', downloadAllAsZIP);
+    
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.target;
+        const answer = document.getElementById(targetId);
+        const icon = toggle.querySelector('svg');
+        
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+  </script>
+</body>
+</html>

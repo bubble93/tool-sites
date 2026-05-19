@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Format, validate, and beautify JSON online for free. Features syntax highlighting, JSONPath query, tree view, and error detection.">
+  <meta name="keywords" content="json formatter, json validator, beautify json, minify json, json path query">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free JSON Formatter & Validator - Beautify, Minify & Validate JSON Online">
+  <meta property="og:description" content="Format, validate, and beautify JSON online for free. Features syntax highlighting, JSONPath query, tree view, and error detection.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/json-formatter/">
+  <meta property="og:site_name" content="JSON Formatter">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourusername.github.io/json-formatter/">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      transition: max-height 0.3s ease-in;
+    }
+    .json-output {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .json-string { color: #98c379; }
+    .json-number { color: #d19a66; }
+    .json-boolean { color: #61afef; }
+    .json-null { color: #c678dd; }
+    .json-key { color: #e06c75; }
+    .json-bracket { color: #abb2bf; }
+    .json-error { background-color: rgba(220, 53, 69, 0.2); border-left: 3px solid #dc3545; }
+    .json-highlight { background-color: rgba(52, 211, 153, 0.3); border-radius: 2px; }
+    .tree-toggle { cursor: pointer; user-select: none; }
+    .tree-toggle:hover { color: #34d399; }
+    .tree-children { padding-left: 20px; }
+    .tree-collapsed > .tree-content { display: none; }
+  </style>
+  
+  <title>Free JSON Formatter & Validator - Beautify, Minify & Validate JSON Online</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-primary-400">JSON Formatter</span>
+      </div>
+      <nav>
+        <a href="https://yourusername.github.io/" class="text-gray-300 hover:text-primary-400 transition-colors text-sm font-medium">
+          More Tools
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="flex-1 pt-16 pb-8 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center py-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary-400 mb-2">JSON Formatter & Validator</h1>
+        <p class="text-gray-400">Format, validate, beautify, and minify JSON with syntax highlighting</p>
+      </div>
+      
+      <!-- Toolbar -->
+      <div class="bg-gray-800 rounded-xl p-4 border border-gray-700 mb-4">
+        <div class="flex flex-wrap items-center gap-4">
+          <!-- Indent Setting -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Indent:</span>
+            <select id="indentSelect" class="px-3 py-1.5 bg-gray-700 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-primary-500">
+              <option value="2">2 Spaces</option>
+              <option value="4" selected>4 Spaces</option>
+              <option value="tab">Tab</option>
+            </select>
+          </div>
+          
+          <!-- Mode Toggle -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Mode:</span>
+            <button id="beautifyBtn" class="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors">
+              Beautify
+            </button>
+            <button id="minifyBtn" class="px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+              Minify
+            </button>
+          </div>
+          
+          <!-- View Toggle -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">View:</span>
+            <button id="codeViewBtn" class="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors">
+              Code
+            </button>
+            <button id="treeViewBtn" class="px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+              Tree
+            </button>
+          </div>
+          
+          <!-- Actions -->
+          <div class="flex items-center gap-2 ml-auto">
+            <button id="copyBtn" class="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg text-sm transition-colors flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy
+            </button>
+            <button id="downloadBtn" class="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm transition-colors flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download
+            </button>
+          </div>
+        </div>
+        
+        <!-- JSONPath Query -->
+        <div class="mt-4 flex items-center gap-2">
+          <span class="text-gray-400 text-sm whitespace-nowrap">JSONPath:</span>
+          <input type="text" id="jsonpathInput" placeholder="e.g., $.store.book[0].title or $..author" 
+                 class="flex-1 px-3 py-1.5 bg-gray-700 border border-gray-600 rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:border-primary-500">
+          <button id="jsonpathBtn" class="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg text-sm transition-colors">
+            Search
+          </button>
+          <button id="jsonpathClear" class="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg text-sm transition-colors">
+            Clear
+          </button>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-4">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- Editor Panels -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        <!-- Input Panel -->
+        <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+          <div class="px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+            <span class="text-gray-300 font-medium">Input JSON</span>
+            <span id="inputSize" class="text-gray-500 text-xs">0 bytes</span>
+          </div>
+          <div id="inputDropArea" class="relative">
+            <textarea id="jsonInput" 
+                      class="w-full h-96 lg:h-[500px] p-4 bg-gray-900 text-gray-100 resize-none focus:outline-none font-mono text-sm"
+                      placeholder="Paste your JSON here or drag and drop a .json file..."></textarea>
+          </div>
+        </div>
+        
+        <!-- Output Panel -->
+        <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+          <div class="px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+            <span class="text-gray-300 font-medium">Formatted Output</span>
+            <span id="outputStatus" class="text-gray-500 text-xs"></span>
+          </div>
+          <div id="outputContainer" class="h-96 lg:h-[500px] overflow-auto p-4 bg-gray-900">
+            <div id="jsonOutput" class="json-output"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Error Display -->
+      <div id="errorDisplay" class="hidden bg-red-900/30 border border-red-700 rounded-xl p-4 mb-4">
+        <div class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <h3 class="text-red-400 font-medium mb-1">JSON Error</h3>
+            <p id="errorMessage" class="text-red-300 text-sm"></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Statistics Bar -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-4">
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Keys:</span>
+            <span id="statKeys" class="text-primary-400 font-semibold">0</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Depth:</span>
+            <span id="statDepth" class="text-primary-400 font-semibold">0</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Size:</span>
+            <span id="statSize" class="text-primary-400 font-semibold">0 B</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Lines:</span>
+            <span id="statLines" class="text-primary-400 font-semibold">0</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 text-sm">Type:</span>
+            <span id="statType" class="text-primary-400 font-semibold">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-4">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-4">
+        <h2 class="text-xl font-semibold text-primary-400 mb-6">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">What is JSON formatting?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">JSON formatting is the process of arranging JSON data with proper indentation and line breaks to make it human-readable. This helps developers easily read, understand, and debug JSON data.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">How do I validate JSON?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Simply paste or type your JSON in the input area. The tool will automatically validate it and display any syntax errors with the specific line and character position where the error occurred.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">What is JSONPath?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">JSONPath is a query language for selecting data from JSON. Use expressions like $.store.book[0].title to find specific values, or $..author to find all occurrences of a key anywhere in the document.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">Can I format large JSON files?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes, the tool handles large JSON files efficiently. However, for very large files (over 10MB), you may experience slight delays. Consider using the tree view for better navigation of complex structures.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">Is my JSON data secure?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes, your data is completely secure. All processing happens locally in your browser. Your JSON is never uploaded to any server, and no data is stored or transmitted externally.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div>
+          <p>&copy; 2024 Tool Sites. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy" class="hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-primary-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Formatter & Validator",
+    "description": "Format, validate, and beautify JSON online for free. Features syntax highlighting, JSONPath query, tree view, and error detection.",
+    "url": "https://yourusername.github.io/json-formatter/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is JSON formatting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSON formatting is the process of arranging JSON data with proper indentation and line breaks to make it human-readable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I validate JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply paste or type your JSON in the input area. The tool will automatically validate it and display any syntax errors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is JSONPath?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSONPath is a query language for selecting data from JSON using expressions like $.store.book[0].title."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I format large JSON files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the tool handles large JSON files efficiently. Consider using the tree view for better navigation of complex structures."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my JSON data secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all processing happens locally in your browser. Your JSON is never uploaded to any server."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- JSON Formatter Script -->
+  <script>
+    const jsonInput = document.getElementById('jsonInput');
+    const jsonOutput = document.getElementById('jsonOutput');
+    const outputContainer = document.getElementById('outputContainer');
+    const errorDisplay = document.getElementById('errorDisplay');
+    const errorMessage = document.getElementById('errorMessage');
+    const outputStatus = document.getElementById('outputStatus');
+    const inputSize = document.getElementById('inputSize');
+    const indentSelect = document.getElementById('indentSelect');
+    const beautifyBtn = document.getElementById('beautifyBtn');
+    const minifyBtn = document.getElementById('minifyBtn');
+    const codeViewBtn = document.getElementById('codeViewBtn');
+    const treeViewBtn = document.getElementById('treeViewBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const jsonpathInput = document.getElementById('jsonpathInput');
+    const jsonpathBtn = document.getElementById('jsonpathBtn');
+    const jsonpathClear = document.getElementById('jsonpathClear');
+    const inputDropArea = document.getElementById('inputDropArea');
+    
+    let currentMode = 'beautify';
+    let currentView = 'code';
+    let parsedData = null;
+    let highlightedPaths = [];
+    
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+    
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function syntaxHighlight(json, indent = 4) {
+      if (typeof json !== 'string') {
+        json = JSON.stringify(json, null, indent === 'tab' ? '\t' : indent);
+      }
+      
+      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+        let cls = 'json-number';
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = 'json-key';
+          } else {
+            cls = 'json-string';
+          }
+        } else if (/true|false/.test(match)) {
+          cls = 'json-boolean';
+        } else if (/null/.test(match)) {
+          cls = 'json-null';
+        }
+        return `<span class="${cls}">${match}</span>`;
+      });
+    }
+    
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    
+    function highlightPaths(html, paths) {
+      if (!paths || paths.length === 0) return html;
+      return html.replace(/("([^"]+)":)/g, (match, key) => {
+        const keyName = key.replace(/"/g, '').replace(':', '');
+        const isHighlighted = paths.some(p => p.includes(keyName));
+        return isHighlighted ? `<span class="json-highlight">${key}</span>` : key;
+      });
+    }
+    
+    function countKeys(obj, count = { total: 0 }) {
+      if (Array.isArray(obj)) {
+        obj.forEach(item => countKeys(item, count));
+      } else if (obj && typeof obj === 'object') {
+        count.total += Object.keys(obj).length;
+        Object.values(obj).forEach(val => countKeys(val, count));
+      }
+      return count.total;
+    }
+    
+    function getDepth(obj, currentDepth = 0) {
+      if (Array.isArray(obj)) {
+        return obj.reduce((max, item) => Math.max(max, getDepth(item, currentDepth + 1)), currentDepth);
+      } else if (obj && typeof obj === 'object') {
+        return Object.values(obj).reduce((max, val) => Math.max(max, getDepth(val, currentDepth + 1)), currentDepth);
+      }
+      return currentDepth;
+    }
+    
+    function getType(value) {
+      if (Array.isArray(value)) return 'Array';
+      if (value === null) return 'null';
+      if (typeof value === 'object') return 'Object';
+      if (typeof value === 'string') return 'String';
+      if (typeof value === 'number') return 'Number';
+      if (typeof value === 'boolean') return 'Boolean';
+      return 'Unknown';
+    }
+    
+    function updateStatistics(data) {
+      document.getElementById('statKeys').textContent = countKeys(data);
+      document.getElementById('statDepth').textContent = getDepth(data);
+      document.getElementById('statSize').textContent = formatFileSize(new Blob([JSON.stringify(data)]).size);
+      document.getElementById('statLines').textContent = jsonInput.value.split('\n').length;
+      document.getElementById('statType').textContent = getType(data);
+    }
+    
+    function processJSON() {
+      const input = jsonInput.value.trim();
+      inputSize.textContent = formatFileSize(new Blob([input]).size);
+      
+      if (!input) {
+        jsonOutput.innerHTML = '';
+        outputStatus.textContent = '';
+        errorDisplay.classList.add('hidden');
+        document.getElementById('statKeys').textContent = '0';
+        document.getElementById('statDepth').textContent = '0';
+        document.getElementById('statSize').textContent = '0 B';
+        document.getElementById('statLines').textContent = '0';
+        document.getElementById('statType').textContent = '-';
+        return;
+      }
+      
+      try {
+        parsedData = JSON.parse(input);
+        errorDisplay.classList.add('hidden');
+        
+        if (currentView === 'code') {
+          const indent = indentSelect.value === 'tab' ? '\t' : parseInt(indentSelect.value);
+          let formatted = currentMode === 'beautify' 
+            ? JSON.stringify(parsedData, null, indent)
+            : JSON.stringify(parsedData);
+          
+          let highlighted = syntaxHighlight(formatted, indent);
+          highlighted = highlightPaths(highlighted, highlightedPaths);
+          jsonOutput.innerHTML = highlighted;
+        } else {
+          jsonOutput.innerHTML = renderTree(parsedData);
+          setupTreeToggles();
+        }
+        
+        updateStatistics(parsedData);
+        
+        const lineCount = input.split('\n').length;
+        outputStatus.textContent = `Valid JSON • ${lineCount} lines`;
+        
+      } catch (e) {
+        errorDisplay.classList.remove('hidden');
+        let errorMsg = e.message;
+        
+        const match = e.message.match(/position (\d+)/);
+        if (match) {
+          const pos = parseInt(match[1]);
+          const lines = input.substring(0, pos).split('\n');
+          const line = lines.length;
+          const col = lines[lines.length - 1].length + 1;
+          errorMsg += ` (Line ${line}, Column ${col})`;
+        }
+        
+        errorMessage.textContent = errorMsg;
+        jsonOutput.innerHTML = '';
+        document.getElementById('statKeys').textContent = '0';
+        document.getElementById('statDepth').textContent = '0';
+        document.getElementById('statSize').textContent = formatFileSize(new Blob([input]).size);
+        document.getElementById('statLines').textContent = input.split('\n').length;
+        document.getElementById('statType').textContent = 'Invalid';
+      }
+    }
+    
+    function renderTree(data, key = null, path = '') {
+      if (data === null) {
+        return `<div class="tree-item"><span class="json-key">${key ? '"' + escapeHtml(key) + '": ' : ''}</span><span class="json-null">null</span></div>`;
+      }
+      
+      if (typeof data !== 'object') {
+        let cls = typeof data === 'string' ? 'json-string' : 
+                  typeof data === 'number' ? 'json-number' : 'json-boolean';
+        let value = typeof data === 'string' ? '"' + escapeHtml(data) + '"' : data;
+        return `<div class="tree-item"><span class="json-key">${key ? '"' + escapeHtml(key) + '": ' : ''}</span><span class="${cls}">${value}</span></div>`;
+      }
+      
+      const isArray = Array.isArray(data);
+      const openBracket = isArray ? '[' : '{';
+      const closeBracket = isArray ? ']' : '}';
+      const count = Object.keys(data).length;
+      const newPath = path + (key ? '.' + key : '');
+      
+      let html = `<div class="tree-node" data-path="${newPath}">`;
+      html += `<div class="tree-toggle"><span class="json-bracket">${openBracket}</span> <span class="text-gray-400 text-xs">${count} ${isArray ? 'items' : 'keys'}</span></div>`;
+      html += '<div class="tree-children">';
+      
+      if (count > 0) {
+        const entries = isArray ? data.map((v, i) => [i, v]) : Object.entries(data);
+        entries.forEach(([k, v]) => {
+          html += renderTree(v, isArray ? null : k, newPath);
+        });
+      }
+      
+      html += `<div><span class="json-bracket">${closeBracket}</span></div>`;
+      html += '</div></div>';
+      
+      return html;
+    }
+    
+    function setupTreeToggles() {
+      document.querySelectorAll('.tree-toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const node = toggle.closest('.tree-node');
+          const children = node.querySelector('.tree-children');
+          const icon = toggle.querySelector('.json-bracket');
+          
+          if (children.style.display === 'none') {
+            children.style.display = 'block';
+            icon.textContent = children.querySelector('.json-bracket').textContent.startsWith('[') ? '[ ' : '{ ';
+          } else {
+            children.style.display = 'none';
+            icon.textContent = children.querySelector('.json-bracket').textContent.startsWith('[') ? '[...]' : '{...}';
+          }
+        });
+      });
+    }
+    
+    function simpleJsonPathQuery(data, path) {
+      const results = [];
+      
+      if (path.startsWith('$')) {
+        path = path.substring(1);
+      }
+      
+      path = path.replace(/^\./, '').replace(/\.\[/g, '[').replace(/\[(\d+)\]/g, '.$1');
+      
+      function traverse(obj, currentPath, parts) {
+        if (parts.length === 0) {
+          results.push(obj);
+          return;
+        }
+        
+        const part = parts[0];
+        
+        if (part === '*') {
+          if (Array.isArray(obj)) {
+            obj.forEach((item, i) => traverse(item, currentPath + '.' + i, parts.slice(1)));
+          } else if (obj && typeof obj === 'object') {
+            Object.entries(obj).forEach(([k, v]) => traverse(v, currentPath + '.' + k, parts.slice(1)));
+          }
+          return;
+        }
+        
+        if (part.startsWith('..')) {
+          traverse(obj, currentPath, [part.substring(2), ...parts.slice(1)]);
+          if (Array.isArray(obj)) {
+            obj.forEach((item, i) => traverse(item, currentPath + '.' + i, parts));
+          } else if (obj && typeof obj === 'object') {
+            Object.entries(obj).forEach(([k, v]) => {
+              traverse(v, currentPath + '.' + k, parts);
+            });
+          }
+          return;
+        }
+        
+        if (Array.isArray(obj)) {
+          const idx = parseInt(part);
+          if (!isNaN(idx) && obj[idx]) {
+            traverse(obj[idx], currentPath + '.' + idx, parts.slice(1));
+          }
+        } else if (obj && typeof obj === 'object' && obj[part] !== undefined) {
+          traverse(obj[part], currentPath + '.' + part, parts.slice(1));
+        }
+      }
+      
+      const parts = path.split('.').filter(p => p);
+      traverse(data, '$', parts);
+      
+      return results;
+    }
+    
+    function performJsonPathSearch() {
+      if (!parsedData) return;
+      
+      const query = jsonpathInput.value.trim();
+      if (!query) {
+        highlightedPaths = [];
+        processJSON();
+        return;
+      }
+      
+      try {
+        const results = simpleJsonPathQuery(parsedData, query);
+        highlightedPaths = [query];
+        processJSON();
+        
+        outputStatus.textContent = `Found ${results.length} match${results.length !== 1 ? 'es' : ''}`;
+      } catch (e) {
+        console.log('JSONPath error:', e.message);
+      }
+    }
+    
+    function copyToClipboard() {
+      if (!jsonInput.value.trim()) return;
+      
+      try {
+        const formatted = JSON.stringify(JSON.parse(jsonInput.value), null, indentSelect.value === 'tab' ? '\t' : parseInt(indentSelect.value));
+        navigator.clipboard.writeText(formatted).then(() => {
+          const originalText = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+          setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
+        });
+      } catch (e) {
+        alert('Cannot copy: Invalid JSON');
+      }
+    }
+    
+    function downloadJSON() {
+      if (!jsonInput.value.trim()) return;
+      
+      try {
+        const data = JSON.parse(jsonInput.value);
+        const formatted = JSON.stringify(data, null, indentSelect.value === 'tab' ? '\t' : parseInt(indentSelect.value));
+        const blob = new Blob([formatted], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'formatted.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        alert('Cannot download: Invalid JSON');
+      }
+    }
+    
+    function handleFileDrop(e) {
+      e.preventDefault();
+      inputDropArea.classList.remove('border-primary-500');
+      
+      const file = e.dataTransfer.files[0];
+      if (file && (file.type === 'application/json' || file.name.endsWith('.json'))) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          jsonInput.value = event.target.result;
+          processJSON();
+        };
+        reader.readAsText(file);
+      }
+    }
+    
+    jsonInput.addEventListener('input', processJSON);
+    
+    indentSelect.addEventListener('change', () => {
+      if (parsedData) {
+        if (currentView === 'code') {
+          const indent = indentSelect.value === 'tab' ? '\t' : parseInt(indentSelect.value);
+          const formatted = currentMode === 'beautify' 
+            ? JSON.stringify(parsedData, null, indent)
+            : JSON.stringify(parsedData);
+          jsonOutput.innerHTML = syntaxHighlight(formatted, indent);
+        }
+      }
+    });
+    
+    beautifyBtn.addEventListener('click', () => {
+      currentMode = 'beautify';
+      beautifyBtn.className = 'px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      minifyBtn.className = 'px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      processJSON();
+    });
+    
+    minifyBtn.addEventListener('click', () => {
+      currentMode = 'minify';
+      minifyBtn.className = 'px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      beautifyBtn.className = 'px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      processJSON();
+    });
+    
+    codeViewBtn.addEventListener('click', () => {
+      currentView = 'code';
+      codeViewBtn.className = 'px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      treeViewBtn.className = 'px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      processJSON();
+    });
+    
+    treeViewBtn.addEventListener('click', () => {
+      currentView = 'tree';
+      treeViewBtn.className = 'px-3 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      codeViewBtn.className = 'px-3 py-1.5 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      processJSON();
+    });
+    
+    copyBtn.addEventListener('click', copyToClipboard);
+    downloadBtn.addEventListener('click', downloadJSON);
+    
+    jsonpathBtn.addEventListener('click', performJsonPathSearch);
+    jsonpathInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') performJsonPathSearch();
+    });
+    jsonpathClear.addEventListener('click', () => {
+      jsonpathInput.value = '';
+      highlightedPaths = [];
+      processJSON();
+    });
+    
+    inputDropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      inputDropArea.classList.add('border-primary-500');
+    });
+    inputDropArea.addEventListener('dragleave', () => {
+      inputDropArea.classList.remove('border-primary-500');
+    });
+    inputDropArea.addEventListener('drop', handleFileDrop);
+    
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.target;
+        const answer = document.getElementById(targetId);
+        const icon = toggle.querySelector('svg');
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+  </script>
+</body>
+</html>

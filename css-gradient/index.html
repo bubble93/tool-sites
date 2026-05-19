@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create stunning CSS gradients visually. Adjust colors, angles, and stops with real-time preview. Copy CSS code instantly. Free and no signup.">
+  <meta name="keywords" content="css gradient, gradient generator, css background, online css tool, gradient maker">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Free CSS Gradient Generator - Create Beautiful Gradients with Preview">
+  <meta property="og:description" content="Create stunning CSS gradients visually. Adjust colors, angles, and stops with real-time preview. Copy CSS code instantly. Free and no signup.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/css-gradient/">
+  <meta property="og:site_name" content="CSS Gradient Generator">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://yourusername.github.io/css-gradient/">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer.open {
+      max-height: 200px;
+      transition: max-height 0.3s ease-in;
+    }
+    .gradient-canvas {
+      cursor: crosshair;
+    }
+    .gradient-preview {
+      background-size: 100% 100%;
+    }
+  </style>
+  
+  <title>Free CSS Gradient Generator - Create Beautiful Gradients with Preview</title>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-primary-400">CSS Gradient</span>
+      </div>
+      <nav>
+        <a href="https://yourusername.github.io/" class="text-gray-300 hover:text-primary-400 transition-colors text-sm font-medium">
+          More Tools
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="flex-1 pt-16 pb-8 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center py-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary-400 mb-2">CSS Gradient Generator</h1>
+        <p class="text-gray-400">Create beautiful gradients visually and copy the CSS code</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Left Panel - Editor -->
+        <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
+          <h2 class="text-xl font-semibold text-primary-400 mb-6">Gradient Editor</h2>
+          
+          <!-- Gradient Type Toggle -->
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-gray-400 text-sm">Type:</span>
+            <button id="linearBtn" class="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors">
+              Linear
+            </button>
+            <button id="radialBtn" class="px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+              Radial
+            </button>
+          </div>
+          
+          <!-- Angle Control (Linear Only) -->
+          <div id="angleControl" class="mb-6">
+            <div class="flex items-center gap-4">
+              <span class="text-gray-400 text-sm w-16">Angle:</span>
+              <input type="range" id="angleSlider" min="0" max="360" value="180" 
+                     class="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500">
+              <input type="number" id="angleInput" min="0" max="360" value="180" 
+                     class="w-20 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white text-center focus:outline-none focus:border-primary-500">
+              <span class="text-gray-400 text-sm">deg</span>
+            </div>
+            
+            <!-- Angle Visualizer -->
+            <div class="mt-4 flex items-center justify-center">
+              <div class="relative w-20 h-20">
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-600"/>
+                  <line x1="50" y1="50" x2="50" y2="5" stroke="#34d399" stroke-width="3" stroke-linecap="round" 
+                        transform="rotate(180 50 50)"/>
+                  <circle cx="50" cy="50" r="8" fill="#34d399"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Gradient Canvas -->
+          <div class="mb-6">
+            <label class="block text-gray-400 text-sm mb-2">Color Stops (click to add, drag to move, double-click to change color)</label>
+            <div class="relative">
+              <canvas id="gradientCanvas" class="gradient-canvas w-full h-12 rounded-lg border border-gray-600"></canvas>
+            </div>
+          </div>
+          
+          <!-- Color Stops List -->
+          <div id="colorStopsList" class="mb-6 space-y-2">
+          </div>
+          
+          <!-- Actions -->
+          <div class="flex gap-3">
+            <button id="randomBtn" class="flex-1 px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 0-2-2H7l-4 4V5a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2z"></path>
+              </svg>
+              Random Gradient
+            </button>
+            <button id="resetBtn" class="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors">
+              Reset
+            </button>
+          </div>
+        </div>
+        
+        <!-- Right Panel - Preview & Code -->
+        <div class="space-y-6">
+          <!-- Preview Area -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+              <span class="text-gray-300 font-medium">Preview</span>
+              <button id="fullscreenBtn" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+            <div id="gradientPreview" class="gradient-preview h-64"></div>
+          </div>
+          
+          <!-- CSS Code Output -->
+          <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+            <div class="px-4 py-3 border-b border-gray-700 flex items-center justify-between">
+              <span class="text-gray-300 font-medium">CSS Code</span>
+              <button id="copyBtn" class="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy
+              </button>
+            </div>
+            <div class="p-4 bg-gray-900">
+              <code id="cssCode" class="text-sm text-gray-300 font-mono break-all"></code>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Presets Section -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-4">Preset Gradients</h2>
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+          <!-- Presets will be generated by JS -->
+          <div id="presetsGrid"></div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
+        <h2 class="text-xl font-semibold text-primary-400 mb-6">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">What is a CSS gradient?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">A CSS gradient is a special type of image that smoothly transitions between two or more colors. It's created using CSS without needing an actual image file, making it lightweight and customizable.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">How do I create a linear gradient?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Select "Linear" as the gradient type, then use the angle slider to set the direction (0° = top to bottom, 90° = left to right). Add color stops by clicking on the gradient bar and adjust their positions by dragging.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">What is the difference between linear and radial gradients?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Linear gradients transition colors along a straight line, while radial gradients radiate from a center point outward in an elliptical or circular pattern. Linear gradients are great for backgrounds, while radial gradients work well for highlights and spot effects.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">Can I use multiple color stops?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Yes! You can add as many color stops as you need by clicking on the gradient bar. Each stop can have its own color and position. Drag stops to adjust their positions or double-click to change their color.</p>
+            </div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">How do I copy the CSS code?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800">
+              <p class="text-gray-400">Simply click the "Copy" button next to the CSS code output. The code will be copied to your clipboard automatically. You can then paste it into your CSS file or inline style attribute.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AD SLOT -->
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+        <div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg">
+          <span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div>
+          <p>&copy; 2024 Tool Sites. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy" class="hover:text-primary-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-primary-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CSS Gradient Generator",
+    "description": "Create stunning CSS gradients visually. Adjust colors, angles, and stops with real-time preview. Copy CSS code instantly. Free and no signup.",
+    "url": "https://yourusername.github.io/css-gradient/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a CSS gradient?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A CSS gradient is a special type of image that smoothly transitions between two or more colors using CSS without needing an actual image file."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create a linear gradient?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select Linear as the gradient type, use the angle slider to set direction, add color stops by clicking on the gradient bar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between linear and radial gradients?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Linear gradients transition colors along a straight line, while radial gradients radiate from a center point outward."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use multiple color stops?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you can add as many color stops as needed by clicking on the gradient bar. Drag stops to adjust positions or double-click to change colors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I copy the CSS code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click the Copy button next to the CSS code output to copy it to your clipboard."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Gradient Generator Script -->
+  <script>
+    const gradientCanvas = document.getElementById('gradientCanvas');
+    const ctx = gradientCanvas.getContext('2d');
+    const gradientPreview = document.getElementById('gradientPreview');
+    const cssCode = document.getElementById('cssCode');
+    const angleSlider = document.getElementById('angleSlider');
+    const angleInput = document.getElementById('angleInput');
+    const linearBtn = document.getElementById('linearBtn');
+    const radialBtn = document.getElementById('radialBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const presetsGrid = document.getElementById('presetsGrid');
+    const colorStopsList = document.getElementById('colorStopsList');
+    
+    let gradientType = 'linear';
+    let angle = 180;
+    let colorStops = [
+      { color: '#34d399', position: 0 },
+      { color: '#065f46', position: 100 }
+    ];
+    let draggingStop = null;
+    
+    const presetGradients = [
+      ['#667eea', '#764ba2'],
+      ['#f093fb', '#f5576c'],
+      ['#4facfe', '#00f2fe'],
+      ['#43e97b', '#38f9d7'],
+      ['#fa709a', '#fee140'],
+      ['#a8edea', '#fed6e3'],
+      ['#ff9a9e', '#fecfef'],
+      ['#ffecd2', '#fcb69f'],
+      ['#a18cd1', '#fbc2eb'],
+      ['#ff9a9e', '#fecfef'],
+      ['#ffecd2', '#fcb69f'],
+      ['#a18cd1', '#fbc2eb'],
+      ['#238636', '#2ea043'],
+      ['#11998e', '#38ef7d'],
+      ['#eb3349', '#f45c43'],
+      ['#667eea', '#764ba2'],
+      ['#0c4a6e', '#164e63'],
+      ['#7c3aed', '#db2777'],
+      ['#06b6d4', '#3b82f6'],
+      ['#8b5cf6', '#ec4899'],
+      ['#14b8a6', '#0ea5e9'],
+      ['#f59e0b', '#ef4444']
+    ];
+    
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+    
+    function randomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    
+    function drawGradientCanvas() {
+      const rect = gradientCanvas.getBoundingClientRect();
+      gradientCanvas.width = rect.width * window.devicePixelRatio;
+      gradientCanvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      
+      const width = rect.width;
+      const height = rect.height;
+      
+      const gradient = ctx.createLinearGradient(0, 0, width, 0);
+      colorStops.sort((a, b) => a.position - b.position);
+      
+      colorStops.forEach(stop => {
+        gradient.addColorStop(stop.position / 100, stop.color);
+      });
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+      
+      colorStops.forEach(stop => {
+        const x = (stop.position / 100) * width;
+        const y = height / 2;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = stop.color;
+        ctx.fill();
+      });
+    }
+    
+    function updatePreview() {
+      let cssValue;
+      if (gradientType === 'linear') {
+        cssValue = `linear-gradient(${angle}deg, `;
+      } else {
+        cssValue = 'radial-gradient(circle, ';
+      }
+      
+      colorStops.sort((a, b) => a.position - b.position);
+      cssValue += colorStops.map(stop => `${stop.color} ${stop.position}%`).join(', ');
+      cssValue += ')';
+      
+      gradientPreview.style.background = cssValue;
+      
+      cssCode.textContent = `background: ${cssValue};`;
+      
+      const svg = document.querySelector('svg line');
+      if (svg) {
+        svg.setAttribute('transform', `rotate(${angle} 50 50)`);
+      }
+    }
+    
+    function updateColorStopsList() {
+      colorStopsList.innerHTML = '';
+      colorStops.sort((a, b) => a.position - b.position);
+      
+      colorStops.forEach((stop, index) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center gap-3 p-2 bg-gray-700/50 rounded-lg';
+        div.innerHTML = `
+          <input type="color" value="${stop.color}" class="w-10 h-8 rounded cursor-pointer">
+          <input type="range" min="0" max="100" value="${stop.position}" 
+                 class="flex-1 h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-primary-500">
+          <span class="text-gray-400 text-sm w-12">${stop.position}%</span>
+          <button class="remove-stop text-gray-400 hover:text-red-400 transition-colors" data-index="${index}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        `;
+        
+        const colorInput = div.querySelector('input[type="color"]');
+        const rangeInput = div.querySelector('input[type="range"]');
+        const removeBtn = div.querySelector('.remove-stop');
+        
+        colorInput.addEventListener('input', () => {
+          stop.color = colorInput.value;
+          drawGradientCanvas();
+          updatePreview();
+        });
+        
+        rangeInput.addEventListener('input', () => {
+          stop.position = parseInt(rangeInput.value);
+          drawGradientCanvas();
+          updatePreview();
+        });
+        
+        removeBtn.addEventListener('click', () => {
+          if (colorStops.length > 2) {
+            colorStops.splice(index, 1);
+            updateColorStopsList();
+            drawGradientCanvas();
+            updatePreview();
+          }
+        });
+        
+        colorStopsList.appendChild(div);
+      });
+    }
+    
+    function addColorStop(x) {
+      const rect = gradientCanvas.getBoundingClientRect();
+      const position = Math.round((x / rect.width) * 100);
+      
+      const existingStop = colorStops.find(s => Math.abs(s.position - position) < 5);
+      if (existingStop) return;
+      
+      colorStops.push({
+        color: randomColor(),
+        position: position
+      });
+      
+      updateColorStopsList();
+      drawGradientCanvas();
+      updatePreview();
+    }
+    
+    function startDrag(e, stopIndex) {
+      draggingStop = stopIndex;
+      document.addEventListener('mousemove', onDrag);
+      document.addEventListener('mouseup', stopDrag);
+    }
+    
+    function onDrag(e) {
+      if (draggingStop === null) return;
+      
+      const rect = gradientCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const position = Math.max(0, Math.min(100, Math.round((x / rect.width) * 100)));
+      
+      colorStops[draggingStop].position = position;
+      drawGradientCanvas();
+      updatePreview();
+      updateColorStopsList();
+    }
+    
+    function stopDrag() {
+      draggingStop = null;
+      document.removeEventListener('mousemove', onDrag);
+      document.removeEventListener('mouseup', stopDrag);
+    }
+    
+    function handleCanvasClick(e) {
+      if (draggingStop !== null) return;
+      
+      const rect = gradientCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      addColorStop(x);
+    }
+    
+    function handleCanvasDoubleClick(e) {
+      const rect = gradientCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const position = (x / rect.width) * 100;
+      
+      const closestStop = colorStops.find(s => Math.abs(s.position - position) < 10);
+      if (closestStop) {
+        const input = document.createElement('input');
+        input.type = 'color';
+        input.value = closestStop.color;
+        input.style.position = 'fixed';
+        input.style.left = '-9999px';
+        document.body.appendChild(input);
+        
+        input.addEventListener('input', () => {
+          closestStop.color = input.value;
+          drawGradientCanvas();
+          updatePreview();
+          updateColorStopsList();
+          document.body.removeChild(input);
+        });
+        
+        input.click();
+      }
+    }
+    
+    function generateRandomGradient() {
+      const numStops = Math.floor(Math.random() * 3) + 2;
+      colorStops = [];
+      
+      for (let i = 0; i < numStops; i++) {
+        colorStops.push({
+          color: randomColor(),
+          position: Math.round((i / (numStops - 1)) * 100)
+        });
+      }
+      
+      angle = Math.floor(Math.random() * 360);
+      angleSlider.value = angle;
+      angleInput.value = angle;
+      
+      updateColorStopsList();
+      drawGradientCanvas();
+      updatePreview();
+    }
+    
+    function resetGradient() {
+      colorStops = [
+        { color: '#34d399', position: 0 },
+        { color: '#065f46', position: 100 }
+      ];
+      angle = 180;
+      angleSlider.value = angle;
+      angleInput.value = angle;
+      gradientType = 'linear';
+      
+      linearBtn.className = 'px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      radialBtn.className = 'px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      
+      updateColorStopsList();
+      drawGradientCanvas();
+      updatePreview();
+    }
+    
+    function copyToClipboard() {
+      navigator.clipboard.writeText(cssCode.textContent).then(() => {
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+        setTimeout(() => { copyBtn.innerHTML = originalText; }, 2000);
+      });
+    }
+    
+    function openFullscreen() {
+      const previewWindow = window.open('', '_blank');
+      previewWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Gradient Preview</title>
+          <style>
+            html, body { margin: 0; padding: 0; height: 100%; }
+            body { background: ${gradientPreview.style.background}; }
+          </style>
+        </head>
+        <body></body>
+        </html>
+      `);
+      previewWindow.document.close();
+    }
+    
+    function applyPreset(colors) {
+      colorStops = colors.map((color, i) => ({
+        color: color,
+        position: Math.round((i / (colors.length - 1)) * 100)
+      }));
+      
+      updateColorStopsList();
+      drawGradientCanvas();
+      updatePreview();
+    }
+    
+    gradientCanvas.addEventListener('click', handleCanvasClick);
+    gradientCanvas.addEventListener('dblclick', handleCanvasDoubleClick);
+    
+    gradientCanvas.addEventListener('mousedown', (e) => {
+      const rect = gradientCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const position = (x / rect.width) * 100;
+      
+      const closestStop = colorStops.find((s, index) => {
+        const dist = Math.abs(s.position - position);
+        if (dist < 8) {
+          startDrag(e, index);
+          return true;
+        }
+        return false;
+      });
+    });
+    
+    angleSlider.addEventListener('input', () => {
+      angle = parseInt(angleSlider.value);
+      angleInput.value = angle;
+      updatePreview();
+    });
+    
+    angleInput.addEventListener('input', () => {
+      angle = Math.max(0, Math.min(360, parseInt(angleInput.value) || 0));
+      angleSlider.value = angle;
+      updatePreview();
+    });
+    
+    linearBtn.addEventListener('click', () => {
+      gradientType = 'linear';
+      linearBtn.className = 'px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      radialBtn.className = 'px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      document.getElementById('angleControl').style.display = 'block';
+      updatePreview();
+    });
+    
+    radialBtn.addEventListener('click', () => {
+      gradientType = 'radial';
+      radialBtn.className = 'px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium transition-colors';
+      linearBtn.className = 'px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm transition-colors';
+      document.getElementById('angleControl').style.display = 'none';
+      updatePreview();
+    });
+    
+    randomBtn.addEventListener('click', generateRandomGradient);
+    resetBtn.addEventListener('click', resetGradient);
+    copyBtn.addEventListener('click', copyToClipboard);
+    fullscreenBtn.addEventListener('click', openFullscreen);
+    
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.target;
+        const answer = document.getElementById(targetId);
+        const icon = toggle.querySelector('svg');
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+    
+    presetGradients.forEach(gradient => {
+      const div = document.createElement('div');
+      div.className = 'aspect-square rounded-lg cursor-pointer hover:scale-105 transition-transform';
+      div.style.background = `linear-gradient(135deg, ${gradient.join(', ')})`;
+      div.title = gradient.join(', ');
+      div.addEventListener('click', () => applyPreset(gradient));
+      presetsGrid.appendChild(div);
+    });
+    
+    updateColorStopsList();
+    drawGradientCanvas();
+    updatePreview();
+    
+    window.addEventListener('resize', () => {
+      drawGradientCanvas();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate strong, secure passwords instantly. Customize length, characters, and strength. Includes PIN and passphrase modes.">
+  <meta name="keywords" content="password generator, secure password, strong password, passphrase, PIN generator">
+  <meta name="author" content="Tool Sites">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXXXX" />
+  
+  <meta property="og:title" content="Free Secure Password Generator - Create Strong Passwords Online">
+  <meta property="og:description" content="Generate strong, secure passwords instantly. Customize length, characters, and strength. Includes PIN and passphrase modes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/password-generator/">
+  <meta property="og:site_name" content="Password Generator">
+  
+  <link rel="canonical" href="https://yourusername.github.io/password-generator/">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+          }
+      }
+    }
+  </script>
+  
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .faq-answer.open { max-height: 200px; transition: max-height 0.3s ease-in; }
+  </style>
+  
+  <title>Free Secure Password Generator - Create Strong Passwords Online</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "XXXXXXXXXX");
+  </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <header class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-sm border-b border-gray-700 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 11H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2Z"></path>
+            <path d="M11 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"></path>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <span class="text-lg font-semibold text-emerald-400">Password Generator</span>
+      </div>
+      <nav><a href="https://yourusername.github.io/" class="text-gray-300 hover:text-emerald-400 transition-colors text-sm font-medium">More Tools</a></nav>
+    </div>
+  </header>
+  
+  <main class="flex-1 pt-24 pb-8 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-emerald-400 mb-2">Secure Password Generator</h1>
+        <p class="text-gray-400">Create strong, random passwords and passphrases instantly</p>
+      </div>
+      
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 md:p-8 mb-6">
+        <div class="mb-8">
+          <label class="block text-gray-400 text-sm font-medium mb-3">Generated Password</label>
+          <div class="flex items-center gap-3 bg-gray-900 rounded-lg border border-gray-700 p-4">
+            <input type="text" id="generatedPassword" readonly class="flex-1 bg-transparent text-2xl font-mono text-white placeholder-gray-600 focus:outline-none" placeholder="Generate a password...">
+            <button id="copyButton" class="p-2 bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-400 text-sm font-medium">Strength</span>
+            <span id="strengthLabel" class="text-gray-400 text-sm">--</span>
+          </div>
+          <div class="flex gap-1 h-3">
+            <div id="strengthBar1" class="flex-1 bg-gray-700 rounded-full"></div>
+            <div id="strengthBar2" class="flex-1 bg-gray-700 rounded-full"></div>
+            <div id="strengthBar3" class="flex-1 bg-gray-700 rounded-full"></div>
+            <div id="strengthBar4" class="flex-1 bg-gray-700 rounded-full"></div>
+          </div>
+          <div class="mt-2 text-xs text-gray-500" id="timeToCrack">Estimated time to crack: --</div>
+        </div>
+        
+        <div class="flex gap-2 mb-6">
+          <button id="modePassword" class="flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium transition-colors">Password</button>
+          <button id="modePin" class="flex-1 px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors">PIN</button>
+          <button id="modePassphrase" class="flex-1 px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors">Passphrase</button>
+        </div>
+        
+        <div id="passwordSettings" class="space-y-6">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-gray-400 text-sm font-medium">Length</label>
+              <span id="lengthValue" class="text-emerald-400 font-semibold">16</span>
+            </div>
+            <input type="range" id="lengthSlider" min="8" max="128" value="16" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>8</span><span>128</span></div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="includeUppercase" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-500 focus:ring-emerald-500"><span class="text-gray-300 text-sm">Uppercase (A-Z)</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="includeLowercase" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-500 focus:ring-emerald-500"><span class="text-gray-300 text-sm">Lowercase (a-z)</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="includeNumbers" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-500 focus:ring-emerald-500"><span class="text-gray-300 text-sm">Numbers (0-9)</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="includeSymbols" checked class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-500 focus:ring-emerald-500"><span class="text-gray-300 text-sm">Symbols (!@#$%)</span></label>
+          </div>
+          
+          <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="excludeAmbiguous" class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-emerald-500 focus:ring-emerald-500"><span class="text-gray-300 text-sm">Exclude ambiguous characters (0/O, 1/l/I)</span></label>
+          
+          <div>
+            <label class="block text-gray-400 text-sm font-medium mb-2">Custom exclude characters</label>
+            <input type="text" id="customExclude" placeholder="Characters to exclude" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-500 font-mono">
+          </div>
+        </div>
+        
+        <div id="pinSettings" class="hidden space-y-6">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-gray-400 text-sm font-medium">PIN Length</label>
+              <span id="pinLengthValue" class="text-emerald-400 font-semibold">4</span>
+            </div>
+            <input type="range" id="pinLengthSlider" min="4" max="8" value="4" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>4</span><span>8</span></div>
+          </div>
+        </div>
+        
+        <div id="passphraseSettings" class="hidden space-y-6">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-gray-400 text-sm font-medium">Number of words</label>
+              <span id="wordCountValue" class="text-emerald-400 font-semibold">4</span>
+            </div>
+            <input type="range" id="wordCountSlider" min="2" max="10" value="4" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+            <div class="flex justify-between text-xs text-gray-500 mt-1"><span>2</span><span>10</span></div>
+          </div>
+          <div>
+            <label class="block text-gray-400 text-sm font-medium mb-2">Separator</label>
+            <select id="separatorSelect" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-emerald-500">
+              <option value="-">Hyphen (-)</option>
+              <option value="_">Underscore (_)</option>
+              <option value=" ">Space ( )</option>
+              <option value=".">Dot (.)</option>
+              <option value="">No separator</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <div class="flex justify-between items-center mb-2">
+            <label class="text-gray-400 text-sm font-medium">Number to generate</label>
+            <span id="countValue" class="text-emerald-400 font-semibold">1</span>
+          </div>
+          <input type="range" id="countSlider" min="1" max="10" value="1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>1</span><span>10</span></div>
+        </div>
+        
+        <button id="generateButton" class="w-full mt-8 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-lg">Generate Passwords</button>
+      </div>
+      
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6"><div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg"><span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span></div></div>
+      
+      <div id="batchResults" class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6 hidden">
+        <h2 class="text-xl font-semibold text-emerald-400 mb-4">Generated Passwords</h2>
+        <div id="passwordList" class="space-y-3 max-h-80 overflow-y-auto"></div>
+      </div>
+      
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-emerald-400">History</h2>
+          <button id="clearHistory" class="text-sm text-gray-400 hover:text-red-400 transition-colors">Clear</button>
+        </div>
+        <div id="historyList" class="space-y-3 max-h-60 overflow-y-auto"><p class="text-gray-500 text-sm">No history yet</p></div>
+      </div>
+      
+      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6"><div class="flex items-center justify-center h-20 bg-gray-700/50 rounded-lg"><span class="text-gray-400 text-sm">728x90 Banner Ad Placeholder</span></div></div>
+      
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-emerald-400 mb-6">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq1">
+              <span class="text-gray-300 font-medium">What makes a strong password?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq1" class="faq-answer px-4 py-3 bg-gray-800"><p class="text-gray-400">A strong password is long (12+ characters), uses a mix of uppercase, lowercase, numbers, and symbols, and is unique to each account.</p></div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq2">
+              <span class="text-gray-300 font-medium">How long should my password be?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq2" class="faq-answer px-4 py-3 bg-gray-800"><p class="text-gray-400">For most accounts, aim for at least 12 characters. For sensitive accounts, use 16+ characters.</p></div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq3">
+              <span class="text-gray-300 font-medium">What is a passphrase?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq3" class="faq-answer px-4 py-3 bg-gray-800"><p class="text-gray-400">A passphrase is a sequence of random words. They're easier to remember and often more secure.</p></div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq4">
+              <span class="text-gray-300 font-medium">Are generated passwords truly random?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq4" class="faq-answer px-4 py-3 bg-gray-800"><p class="text-gray-400">Yes, we use the browser's crypto.getRandomValues() which is cryptographically secure.</p></div>
+          </div>
+          
+          <div class="border border-gray-700 rounded-lg overflow-hidden">
+            <button class="faq-toggle w-full px-4 py-3 bg-gray-700/50 hover:bg-gray-700 flex items-center justify-between text-left" data-target="faq5">
+              <span class="text-gray-300 font-medium">Is it safe to use an online password generator?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-emerald-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div id="faq5" class="faq-answer px-4 py-3 bg-gray-800"><p class="text-gray-400">Our generator runs entirely in your browser. No passwords are sent to our servers.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-4xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div><p>&copy; 2024 Tool Sites. All rights reserved.</p></div>
+        <div class="flex gap-4"><a href="/privacy" class="hover:text-emerald-400 transition-colors">Privacy Policy</a><a href="/terms" class="hover:text-emerald-400 transition-colors">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Password Generator",
+    "description": "Generate strong, secure passwords instantly. Customize length, characters, and strength. Includes PIN and passphrase modes.",
+    "url": "https://yourusername.github.io/password-generator/",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "mainEntity": [
+      {"@type": "Question", "name": "What makes a strong password?", "acceptedAnswer": {"@type": "Answer", "text": "A strong password is long (12+ characters), uses a mix of uppercase, lowercase, numbers, and symbols."}},
+      {"@type": "Question", "name": "How long should my password be?", "acceptedAnswer": {"@type": "Answer", "text": "For most accounts, aim for at least 12 characters. For sensitive accounts, use 16+ characters."}},
+      {"@type": "Question", "name": "What is a passphrase?", "acceptedAnswer": {"@type": "Answer", "text": "A passphrase is a sequence of random words. They're easier to remember and often more secure."}},
+      {"@type": "Question", "name": "Are generated passwords truly random?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, we use the browser's crypto.getRandomValues() which is cryptographically secure."}},
+      {"@type": "Question", "name": "Is it safe to use an online password generator?", "acceptedAnswer": {"@type": "Answer", "text": "Our generator runs entirely in your browser. No passwords are sent to our servers."}}
+    ]
+  }
+  </script>
+  
+  <script>
+    const wordlist = ["able", "about", "accept", "account", "achieve", "across", "act", "action", "activity", "add", "address", "administration", "admit", "adult", "affect", "after", "again", "against", "age", "agent", "ago", "agree", "agreement", "ahead", "allow", "almost", "alone", "along", "already", "always", "among", "amount", "analysis", "and", "animal", "answer", "another", "anyone", "anything", "appear", "apply", "approach", "area", "argue", "arm", "around", "arrive", "art", "article", "artist", "as", "ask", "assume", "attack", "attention", "attorney", "audience", "author", "authority", "available", "avoid", "away", "baby", "back", "bad", "bag", "ball", "bank", "bar", "base", "basic", "basis", "be", "bear", "beat", "beautiful", "because", "become", "bed", "before", "begin", "behavior", "behind", "believe", "benefit", "best", "better", "between", "beyond", "big", "bill", "billion", "bird", "black", "blood", "blue", "board", "body", "book", "born", "both", "box", "boy", "break", "bring", "brother", "budget", "build", "building", "business", "busy", "but", "buy", "by", "call", "camera", "campaign", "can", "cancer", "candidate", "capital", "car", "card", "care", "career", "carry", "case", "catch", "cause", "cell", "center", "central", "century", "certain", "certainly", "chair", "challenge", "chance", "change", "character", "charge", "check", "child", "choice", "choose", "church", "citizen", "city", "civil", "claim", "class", "clear", "clearly", "close", "coach", "cold", "collection", "college", "color", "come", "commercial", "common", "community", "company", "compare", "computer", "concern", "condition", "conference", "congress", "consider", "consumer", "contain", "continue", "control", "cost", "could", "country", "couple", "course", "court", "cover", "create", "crime", "cultural", "culture", "cup", "current", "customer", "cut", "dark", "data", "daughter", "day", "dead", "deal", "death", "debate", "decade", "decide", "decision", "deep", "defense", "degree", "democrat", "democratic", "describe", "design", "despite", "detail", "determine", "develop", "development", "die", "difference", "different", "difficult", "dinner", "direction", "director", "discover", "discuss", "discussion", "disease", "do", "doctor", "dog", "door", "down", "draw", "dream", "drive", "drop", "drug", "during", "each", "early", "east", "easy", "eat", "economic", "economy", "edge", "education", "effect", "effort", "eight", "either", "election", "else", "employee", "end", "energy", "enjoy", "enough", "enter", "entire", "environment", "environmental", "especially", "establish", "even", "evening", "event", "ever", "every", "everybody", "everyone", "everything", "evidence", "exactly", "example", "executive", "exist", "expect", "experience", "expert", "explain", "eye", "face", "fact", "factor", "fail", "fall", "family", "far", "fast", "father", "fear", "federal", "feel", "feeling", "few", "field", "fight", "figure", "file", "fill", "film", "final", "finally", "financial", "find", "fine", "finger", "finish", "fire", "firm", "first", "fish", "five", "floor", "fly", "focus", "follow", "food", "foot", "for", "force", "foreign", "forget", "form", "former", "forward", "four", "free", "friend", "from", "front", "full", "fund", "future", "game", "garden", "gas", "general", "generation", "get", "girl", "give", "glass", "go", "goal", "good", "government", "great", "green", "ground", "group", "grow", "growth", "guess", "gun", "guy", "hair", "half", "hand", "hang", "happen", "happy", "hard", "have", "he", "head", "health", "hear", "heart", "heat", "heavy", "help", "her", "here", "herself", "high", "him", "himself", "his", "history", "hit", "hold", "hole", "home", "hope", "hospital", "hot", "hotel", "hour", "house", "how", "however", "huge", "human", "hundred", "husband", "idea", "identify", "if", "image", "imagine", "impact", "important", "improve", "in", "include", "including", "increase", "indeed", "individual", "industry", "information", "inside", "instead", "institution", "interest", "interesting", "international", "interview", "into", "investment", "involve", "issue", "it", "item", "its", "itself", "job", "join", "just", "keep", "key", "kid", "kill", "king", "kitchen", "know", "knowledge", "land", "language", "large", "last", "late", "later", "laugh", "law", "lawyer", "lay", "lead", "leader", "learn", "least", "leave", "left", "leg", "legal", "less", "let", "letter", "level", "lie", "life", "light", "like", "likely", "line", "link", "list", "listen", "little", "live", "local", "long", "look", "lose", "loss", "lot", "love", "low", "machine", "magazine", "main", "maintain", "major", "majority", "make", "man", "manage", "management", "manager", "many", "market", "marriage", "material", "matter", "may", "me", "mean", "measure", "media", "medical", "meet", "meeting", "member", "memory", "mention", "message", "method", "middle", "might", "military", "million", "mind", "minute", "miss", "mission", "model", "modern", "moment", "money", "month", "more", "morning", "most", "mother", "motion", "move", "movement", "movie", "Mr", "Mrs", "much", "music", "must", "my", "myself", "name", "nation", "national", "natural", "nature", "near", "nearly", "necessary", "need", "network", "never", "new", "news", "newspaper", "next", "nice", "night", "no", "none", "nor", "north", "not", "note", "nothing", "notice", "now", "number", "occur", "of", "off", "offer", "office", "officer", "official", "often", "oil", "old", "on", "once", "one", "only", "open", "operation", "opportunity", "option", "or", "order", "organization", "other", "others", "our", "ourselves", "out", "outside", "over", "own", "owner", "page", "pain", "paint", "paper", "parent", "park", "part", "participant", "particular", "particularly", "partner", "party", "pass", "past", "patient", "pattern", "pay", "peace", "people", "per", "perform", "performance", "perhaps", "period", "person", "personal", "phone", "physical", "pick", "picture", "piece", "place", "plan", "plant", "play", "player", "point", "police", "policy", "political", "politics", "poor", "popular", "population", "position", "positive", "possible", "power", "practice", "prepare", "present", "president", "pressure", "pretty", "prevent", "price", "private", "probably", "problem", "process", "produce", "product", "production", "professional", "professor", "program", "project", "property", "protect", "prove", "provide", "public", "pull", "purpose", "push", "put", "quality", "quarter", "question", "quick", "quickly", "quiet", "quite", "race", "radio", "raise", "range", "rate", "rather", "reach", "read", "ready", "real", "reality", "realize", "really", "reason", "receive", "recent", "recently", "recognize", "record", "red", "reduce", "reflect", "region", "relate", "relationship", "religious", "remain", "remember", "remove", "report", "represent", "republican", "require", "research", "resource", "respond", "response", "responsibility", "rest", "result", "return", "reveal", "rich", "right", "rise", "risk", "road", "rock", "role", "room", "rule", "run", "safe", "safety", "same", "sample", "save", "say", "scene", "school", "science", "scientist", "score", "screen", "sea", "search", "season", "seat", "second", "section", "security", "see", "seek", "seem", "segment", "select", "selection", "self", "sell", "send", "sense", "series", "serious", "serve", "service", "set", "seven", "several", "sex", "sexual", "shake", "share", "she", "shoot", "short", "should", "shoulder", "show", "side", "sign", "signal", "similar", "simple", "simply", "since", "sing", "single", "sister", "sit", "site", "situation", "six", "size", "skill", "skin", "small", "so", "social", "society", "soldier", "some", "somebody", "someone", "something", "sometimes", "son", "song", "soon", "sort", "sound", "source", "south", "space", "speak", "special", "specific", "speech", "speed", "spell", "spend", "sport", "spring", "staff", "stage", "stand", "standard", "star", "start", "state", "statement", "station", "stay", "step", "stick", "still", "stock", "stop", "store", "story", "strategy", "street", "strong", "structure", "student", "study", "stuff", "style", "subject", "success", "successful", "such", "suddenly", "suffer", "suggest", "summer", "sun", "support", "sure", "surface", "system", "table", "take", "talk", "tape", "target", "task", "tax", "teach", "teacher", "team", "technology", "television", "tell", "ten", "tend", "term", "test", "than", "thank", "that", "the", "their", "them", "themselves", "then", "theory", "there", "these", "they", "thing", "think", "third", "this", "those", "though", "thought", "thousand", "threat", "three", "through", "throughout", "throw", "thus", "time", "to", "today", "together", "tomorrow", "tonight", "too", "top", "total", "touch", "toward", "town", "trade", "traditional", "training", "travel", "treat", "treatment", "tree", "trial", "trip", "true", "truth", "try", "turn", "TV", "two", "type", "under", "understand", "unit", "until", "up", "upon", "us", "use", "used", "useful", "user", "using", "usually", "value", "various", "very", "victim", "view", "violence", "visit", "voice", "vote", "wait", "walk", "wall", "want", "war", "watch", "water", "way", "we", "weapon", "wear", "week", "weight", "well", "west", "what", "whatever", "when", "where", "whether", "which", "while", "white", "who", "whole", "whom", "whose", "why", "wide", "wife", "will", "win", "wind", "window", "wish", "with", "within", "without", "woman", "women", "word", "work", "worker", "world", "worry", "would", "write", "writer", "wrong", "yard", "year", "yellow", "yes", "yet", "you", "young", "your", "yourself", "yourselves"];
+  </script>
+  
+  <script>
+    const generatedPassword = document.getElementById('generatedPassword');
+    const copyButton = document.getElementById('copyButton');
+    const generateButton = document.getElementById('generateButton');
+    const lengthSlider = document.getElementById('lengthSlider');
+    const lengthValue = document.getElementById('lengthValue');
+    const countSlider = document.getElementById('countSlider');
+    const countValue = document.getElementById('countValue');
+    const includeUppercase = document.getElementById('includeUppercase');
+    const includeLowercase = document.getElementById('includeLowercase');
+    const includeNumbers = document.getElementById('includeNumbers');
+    const includeSymbols = document.getElementById('includeSymbols');
+    const excludeAmbiguous = document.getElementById('excludeAmbiguous');
+    const customExclude = document.getElementById('customExclude');
+    const pinLengthSlider = document.getElementById('pinLengthSlider');
+    const pinLengthValue = document.getElementById('pinLengthValue');
+    const wordCountSlider = document.getElementById('wordCountSlider');
+    const wordCountValue = document.getElementById('wordCountValue');
+    const separatorSelect = document.getElementById('separatorSelect');
+    const strengthLabel = document.getElementById('strengthLabel');
+    const strengthBar1 = document.getElementById('strengthBar1');
+    const strengthBar2 = document.getElementById('strengthBar2');
+    const strengthBar3 = document.getElementById('strengthBar3');
+    const strengthBar4 = document.getElementById('strengthBar4');
+    const timeToCrack = document.getElementById('timeToCrack');
+    const batchResults = document.getElementById('batchResults');
+    const passwordList = document.getElementById('passwordList');
+    const historyList = document.getElementById('historyList');
+    const clearHistory = document.getElementById('clearHistory');
+    const modePassword = document.getElementById('modePassword');
+    const modePin = document.getElementById('modePin');
+    const modePassphrase = document.getElementById('modePassphrase');
+    const passwordSettings = document.getElementById('passwordSettings');
+    const pinSettings = document.getElementById('pinSettings');
+    const passphraseSettings = document.getElementById('passphraseSettings');
+    
+    const passwordHistory = [];
+    let currentMode = 'password';
+    
+    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+    const ambiguous = '0O1lI';
+    
+    function getRandomInt(min, max) {
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+      return Math.floor((array[0] / 0xFFFFFFFF) * (max - min + 1)) + min;
+    }
+    
+    function getRandomItem(arr) { return arr[getRandomInt(0, arr.length - 1)]; }
+    
+    function getCharset() {
+      let chars = '';
+      if (currentMode === 'password') {
+        if (includeUppercase.checked) chars += uppercase;
+        if (includeLowercase.checked) chars += lowercase;
+        if (includeNumbers.checked) chars += numbers;
+        if (includeSymbols.checked) chars += symbols;
+        if (excludeAmbiguous.checked) ambiguous.split('').forEach(c => chars = chars.replace(new RegExp(c, 'g'), ''));
+        chars = chars.replace(new RegExp(`[${customExclude.value}]`, 'g'), '');
+      } else if (currentMode === 'pin') {
+        chars = numbers;
+      }
+      return chars;
+    }
+    
+    function generateSinglePassword() {
+      if (currentMode === 'passphrase') {
+        const count = parseInt(wordCountSlider.value);
+        const separator = separatorSelect.value;
+        const words = [];
+        for (let i = 0; i < count; i++) words.push(getRandomItem(wordlist));
+        return words.join(separator);
+      }
+      const length = currentMode === 'pin' ? parseInt(pinLengthSlider.value) : parseInt(lengthSlider.value);
+      const chars = getCharset();
+      if (chars.length === 0) return '';
+      let password = '';
+      for (let i = 0; i < length; i++) password += getRandomItem(chars);
+      return password;
+    }
+    
+    function calculateStrength(password) {
+      if (!password) return { strength: 0, label: '--', color: 'bg-gray-700', time: '--' };
+      let charsetSize = 0;
+      if (/[a-z]/.test(password)) charsetSize += 26;
+      if (/[A-Z]/.test(password)) charsetSize += 26;
+      if (/[0-9]/.test(password)) charsetSize += 10;
+      if (/[^a-zA-Z0-9]/.test(password)) charsetSize += 32;
+      const entropy = password.length * Math.log2(charsetSize || 1);
+      let strength, label, color, time;
+      if (entropy < 40) { strength = 1; label = 'Weak'; color = 'bg-red-500'; time = 'Instant'; }
+      else if (entropy < 60) { strength = 2; label = 'Medium'; color = 'bg-yellow-500'; time = 'Seconds to hours'; }
+      else if (entropy < 80) { strength = 3; label = 'Strong'; color = 'bg-green-500'; time = 'Months to years'; }
+      else { strength = 4; label = 'Very Strong'; color = 'bg-emerald-500'; time = 'Centuries or more'; }
+      return { strength, label, color, time };
+    }
+    
+    function updateStrengthBar(strengthInfo) {
+      strengthLabel.textContent = strengthInfo.label;
+      timeToCrack.textContent = 'Estimated time to crack: ' + strengthInfo.time;
+      const bars = [strengthBar1, strengthBar2, strengthBar3, strengthBar4];
+      bars.forEach((bar, i) => bar.className = 'flex-1 rounded-full ' + (i < strengthInfo.strength ? strengthInfo.color : 'bg-gray-700'));
+    }
+    
+    function addToHistory(password) {
+      passwordHistory.unshift({ password, time: new Date().toLocaleTimeString() });
+      if (passwordHistory.length > 20) passwordHistory.pop();
+      renderHistory();
+    }
+    
+    function renderHistory() {
+      if (passwordHistory.length === 0) { historyList.innerHTML = '<p class="text-gray-500 text-sm">No history yet</p>'; return; }
+      historyList.innerHTML = '';
+      passwordHistory.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between bg-gray-700/50 rounded-lg p-3';
+        div.innerHTML = `<div class="flex-1 font-mono text-sm text-gray-300 break-all">${item.password}</div><div class="text-xs text-gray-500 ml-3 whitespace-nowrap">${item.time}</div><button class="copy-history ml-3 p-1 text-gray-400 hover:text-emerald-400" data-password="${item.password}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>';
+        historyList.appendChild(div);
+      });
+      document.querySelectorAll('.copy-history').forEach(btn => btn.addEventListener('click', () => copyToClipboard(btn.dataset.password)));
+    }
+    
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalHTML = copyButton.innerHTML;
+        copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        setTimeout(() => copyButton.innerHTML = originalHTML, 1000);
+      });
+    }
+    
+    function generatePasswords() {
+      const count = parseInt(countSlider.value);
+      const passwords = [];
+      for (let i = 0; i < count; i++) passwords.push(generateSinglePassword());
+      if (passwords[0]) {
+        generatedPassword.value = passwords[0];
+        updateStrengthBar(calculateStrength(passwords[0]));
+        addToHistory(passwords[0]);
+      }
+      if (count > 1) {
+        batchResults.classList.remove('hidden');
+        passwordList.innerHTML = '';
+        passwords.forEach((password, i) => {
+          const div = document.createElement('div');
+          div.className = 'flex items-center gap-3 bg-gray-700/50 rounded-lg p-3';
+          div.innerHTML = `<div class="flex-1 font-mono text-sm text-gray-300 break-all">${password}</div><button class="copy-single p-1 bg-emerald-600 hover:bg-emerald-700 rounded transition-colors" data-password="${password}"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>';
+          passwordList.appendChild(div);
+        });
+        document.querySelectorAll('.copy-single').forEach(btn => btn.addEventListener('click', () => copyToClipboard(btn.dataset.password)));
+      } else {
+        batchResults.classList.add('hidden');
+      }
+    }
+    
+    function setMode(mode) {
+      currentMode = mode;
+      const activeClasses = 'flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium transition-colors';
+      const inactiveClasses = 'flex-1 px-4 py-2 bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors';
+      if (mode === 'password') {
+        modePassword.className = activeClasses; modePin.className = inactiveClasses; modePassphrase.className = inactiveClasses;
+        passwordSettings.classList.remove('hidden'); pinSettings.classList.add('hidden'); passphraseSettings.classList.add('hidden');
+      } else if (mode === 'pin') {
+        modePin.className = activeClasses; modePassword.className = inactiveClasses; modePassphrase.className = inactiveClasses;
+        passwordSettings.classList.add('hidden'); pinSettings.classList.remove('hidden'); passphraseSettings.classList.add('hidden');
+      } else {
+        modePassphrase.className = activeClasses; modePassword.className = inactiveClasses; modePin.className = inactiveClasses;
+        passwordSettings.classList.add('hidden'); pinSettings.classList.add('hidden'); passphraseSettings.classList.remove('hidden');
+      }
+      generatePasswords();
+    }
+    
+    lengthSlider.addEventListener('input', () => { lengthValue.textContent = lengthSlider.value; generatePasswords(); });
+    countSlider.addEventListener('input', () => countValue.textContent = countSlider.value);
+    pinLengthSlider.addEventListener('input', () => { pinLengthValue.textContent = pinLengthSlider.value; generatePasswords(); });
+    wordCountSlider.addEventListener('input', () => { wordCountValue.textContent = wordCountSlider.value; generatePasswords(); });
+    separatorSelect.addEventListener('change', generatePasswords);
+    includeUppercase.addEventListener('change', generatePasswords);
+    includeLowercase.addEventListener('change', generatePasswords);
+    includeNumbers.addEventListener('change', generatePasswords);
+    includeSymbols.addEventListener('change', generatePasswords);
+    excludeAmbiguous.addEventListener('change', generatePasswords);
+    customExclude.addEventListener('input', generatePasswords);
+    generateButton.addEventListener('click', generatePasswords);
+    copyButton.addEventListener('click', () => copyToClipboard(generatedPassword.value));
+    clearHistory.addEventListener('click', () => { passwordHistory.length = 0; renderHistory(); });
+    modePassword.addEventListener('click', () => setMode('password'));
+    modePin.addEventListener('click', () => setMode('pin'));
+    modePassphrase.addEventListener('click', () => setMode('passphrase'));
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const answer = document.getElementById(toggle.dataset.target);
+        const icon = toggle.querySelector('svg');
+        answer.classList.toggle('open');
+        icon.classList.toggle('rotate-180');
+      });
+    });
+    
+    generatePasswords();
+  </script>
+</body>
+</html>
