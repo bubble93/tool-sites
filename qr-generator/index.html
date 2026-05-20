@@ -121,11 +121,11 @@
       console.log('Ads forced to hide via URL parameter');
       hideAds();
     } else {
-      // 尝试多个地理位置检测API
+      // 尝试多个地理位置检测API（按可靠性排序）
       const geoAPIs = [
-        'https://api.ip.sb/geoip',
         'https://ipinfo.io/json',
-        'https://geolocation-db.com/json/'
+        'https://geolocation-db.com/json/',
+        'https://api.ip.sb/geoip'
       ];
       
       let currentAPI = 0;
