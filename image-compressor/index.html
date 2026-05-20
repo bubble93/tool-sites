@@ -131,24 +131,90 @@
   
   <!-- Geo Detection - Block CN users from ads -->
   <script>
-    window.adGeoChecked = false;
-    window.showAds = false;
-    fetch('https://ipapi.co/json/')
-    .then(res=>res.json())
-    .then(data=>{
-      window.adGeoChecked = true;
-      if(data.country_code!=='CN'){
-        window.showAds = true;
+    // 屏蔽中国大陆用户加载广告
+    function showAds() {
+      if(document.getElementById('social-bar-ad')){
         document.getElementById('social-bar-ad').style.display = 'block';
+      }
+      if(document.getElementById('native-banner-ad')){
         document.getElementById('native-banner-ad').style.display = 'block';
       }
-    })
-    .catch(()=>{
-      window.adGeoChecked = true;
-      window.showAds = true;
-      document.getElementById('social-bar-ad').style.display = 'block';
-      document.getElementById('native-banner-ad').style.display = 'block';
-    });
+    }
+
+    function hideAds() {
+      if(document.getElementById('social-bar-ad')){
+        document.getElementById('social-bar-ad').style.display = 'none';
+      }
+      if(document.getElementById('native-banner-ad')){
+        document.getElementById('native-banner-ad').style.display = 'none';
+      }
+    }
+
+    // 检查URL参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const forceAds = urlParams.get('ads');
+    
+    if(forceAds === 'show') {
+      console.log('Ads forced to show via URL parameter');
+      showAds();
+    } else if(forceAds === 'hide') {
+      console.log('Ads forced to hide via URL parameter');
+      hideAds();
+    } else {
+      // 尝试多个地理位置检测API
+      const geoAPIs = [
+        'https://api.ip.sb/geoip',
+        'https://ipinfo.io/json',
+        'https://geolocation-db.com/json/'
+      ];
+      
+      let currentAPI = 0;
+      
+      function tryNextAPI() {
+        if(currentAPI >= geoAPIs.length) {
+          console.error('All geo APIs failed, showing ads by default');
+          showAds();
+          return;
+        }
+        
+        const apiUrl = geoAPIs[currentAPI];
+        console.log('Trying geo API:', apiUrl);
+        
+        fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+          let countryCode = null;
+          
+          // 根据不同API的响应格式提取国家代码
+          if(data.country_code) countryCode = data.country_code;
+          else if(data.country) countryCode = data.country;
+          else if(data.countryCode) countryCode = data.countryCode;
+          
+          if(countryCode) {
+            console.log('User country:', countryCode);
+            
+            if(countryCode === 'CN') {
+              console.log('CN user - ads hidden');
+              hideAds();
+            } else {
+              console.log('Non-CN user - ads shown');
+              showAds();
+            }
+          } else {
+            console.log('Could not extract country code, trying next API');
+            currentAPI++;
+            tryNextAPI();
+          }
+        })
+        .catch(err => {
+          console.error('API error:', apiUrl, err);
+          currentAPI++;
+          tryNextAPI();
+        });
+      }
+      
+      tryNextAPI();
+    }
   </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
