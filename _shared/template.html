@@ -71,6 +71,25 @@
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wtl972b7hd");
   </script>
+
+  <script>
+    // 屏蔽中国大陆用户加载广告
+    fetch('https://ipapi.co/json/')
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.country_code==='CN'){
+        // 中国用户：不执行广告代码
+      }else{
+        // 海外用户：执行广告代码
+        if(document.getElementById('social-bar-ad')){
+          document.getElementById('social-bar-ad').style.display = 'block';
+        }
+        if(document.getElementById('native-banner-ad')){
+          document.getElementById('native-banner-ad').style.display = 'block';
+        }
+      }
+    })
+  </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
   <!-- Header Navigation -->
@@ -108,14 +127,14 @@
       </div>
       
       <!-- AD SLOT - Social Bar -->
-      <div class="ad-container flex justify-center mb-8">
+      <div id="social-bar-ad" class="ad-container flex justify-center mb-8" style="display:none;">
         <script src="https://pl29498996.effectivecpmnetwork.com/14/3e/c8/143ec89618fee248b438252b26f6356b.js"></script>
       </div>
       
       <!-- Additional Tool Content Can Go Here -->
       
       <!-- AD SLOT - Native Banner -->
-      <div class="ad-container flex justify-center mb-8">
+      <div id="native-banner-ad" class="ad-container flex justify-center mb-8" style="display:none;">
         <script async="async" data-cfasync="false" src="https://pl29498995.effectivecpmnetwork.com/e7eaf00aa922d3705f25b9d39bbc7518/invoke.js"></script>
         <div id="container-e7eaf00aa922d3705f25b9d39bbc7518"></div>
       </div>

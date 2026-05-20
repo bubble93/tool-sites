@@ -104,6 +104,20 @@
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wtl972b7hd");
   </script>
+  
+  <!-- Geo Location Detection -->
+  <script>
+    var userCountry = 'unknow';
+    fetch('https://ipapi.co/json/')
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        userCountry = data.country_name || 'unknow';
+        window.userCountry = userCountry;
+      })
+      .catch(function() {
+        window.userCountry = 'unknow';
+      });
+  </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
   <!-- Header Navigation -->
@@ -383,7 +397,7 @@
       
       <!-- AD SLOT - Native Banner -->
       <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
-        <div class="ad-container flex items-center justify-center">
+        <div id="native-banner-ad" class="ad-container flex items-center justify-center" style="display:none;">
           <script async="async" data-cfasync="false" src="https://pl29498995.effectivecpmnetwork.com/e7eaf00aa922d3705f25b9d39bbc7518/invoke.js"></script>
           <div id="container-e7eaf00aa922d3705f25b9d39bbc7518"></div>
         </div>

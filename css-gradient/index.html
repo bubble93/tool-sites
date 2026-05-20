@@ -86,6 +86,22 @@
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wtl972b7hd");
   </script>
+  
+  <!-- Geolocation Detection -->
+  <script>
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        if (data.country_code === 'CN') {
+          localStorage.setItem('userCountry', 'CN');
+        } else {
+          localStorage.setItem('userCountry', 'OTHER');
+        }
+      })
+      .catch(() => {
+        localStorage.setItem('userCountry', 'OTHER');
+      });
+  </script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col">
   <!-- Header Navigation -->
@@ -227,8 +243,8 @@
         <div id="presetsGrid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3"></div>
       </div>
       
-      <!-- AD SLOT -->
-      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+      <!-- AD SLOT - Social Bar -->
+      <div id="social-bar-ad" class="ad-container flex justify-center mb-8" style="display:none;">
         <div class="ad-container flex items-center justify-center">
           <script src="https://pl29498996.effectivecpmnetwork.com/14/3e/c8/143ec89618fee248b438252b26f6356b.js"></script>
         </div>
@@ -302,7 +318,7 @@
       </div>
       
       <!-- AD SLOT -->
-      <div class="bg-gray-800 rounded-xl border border-gray-700 p-4">
+      <div id="native-banner-ad" class="ad-container flex justify-center mb-8" style="display:none;">
         <div class="ad-container flex items-center justify-center">
           <script async="async" data-cfasync="false" src="https://pl29498995.effectivecpmnetwork.com/e7eaf00aa922d3705f25b9d39bbc7518/invoke.js"></script>
           <div id="container-e7eaf00aa922d3705f25b9d39bbc7518"></div>
